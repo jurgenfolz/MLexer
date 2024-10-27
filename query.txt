@@ -1,0 +1,9 @@
+let
+    Source = Excel.Workbook(File.Contents("data.xlsx"), null, true),
+    Sheet1 = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+    #"Renamed Columns" = Table.RenameColumns(Sheet1, {{"OldName", "NewName"}}),
+    #"Filtered Rows" = Table.SelectRows(#"Renamed Columns", each [Status] = "Active"),
+    #"Selected Columns" = Table.SelectColumns(#"Filtered Rows", {"ID", "Name", "Status"}),
+    #"Added Custom" = Table.AddColumn(#"Selected Columns", "IsAdult", each [Age] >= 18)
+in
+    #"Added Custom"
