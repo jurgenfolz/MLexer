@@ -32,8 +32,18 @@ expression
     ;
 
 tableNestedJoinFunction
-    : TABLE_NESTED_JOIN '(' IDENTIFIER ',' '{' LITERAL '}' ',' IDENTIFIER ',' '{' LITERAL '}' ',' LITERAL (',' IDENTIFIER)? ')'
+    : TABLE_NESTED_JOIN '('
+        firstTable=IDENTIFIER ',' firstKeyColumns=literalList ',' secondTable=IDENTIFIER ',' secondKeyColumns=literalList ',' newColumnName=LITERAL
+        (',' joinKind=IDENTIFIER)?
+        (',' keyEqualityComparer=IDENTIFIER)?
+      ')'
     ;
+
+
+literalList
+    : '{' LITERAL (',' LITERAL)* '}'
+    ;
+
 
 functionCall
     : IDENTIFIER OPEN_PAREN argumentList? CLOSE_PAREN

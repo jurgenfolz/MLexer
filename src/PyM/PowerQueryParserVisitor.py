@@ -44,6 +44,11 @@ class PowerQueryParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by PowerQueryParser#literalList.
+    def visitLiteralList(self, ctx:PowerQueryParser.LiteralListContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by PowerQueryParser#functionCall.
     def visitFunctionCall(self, ctx:PowerQueryParser.FunctionCallContext):
         return self.visitChildren(ctx)

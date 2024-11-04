@@ -71,6 +71,15 @@ class PowerQueryParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by PowerQueryParser#literalList.
+    def enterLiteralList(self, ctx:PowerQueryParser.LiteralListContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#literalList.
+    def exitLiteralList(self, ctx:PowerQueryParser.LiteralListContext):
+        pass
+
+
     # Enter a parse tree produced by PowerQueryParser#functionCall.
     def enterFunctionCall(self, ctx:PowerQueryParser.FunctionCallContext):
         pass
