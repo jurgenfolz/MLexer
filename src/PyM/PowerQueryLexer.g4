@@ -136,6 +136,7 @@ AMP                                    : '&';
 LEQ                                    : '<=';
 GEQ                                    : '>=';
 TABLE_NESTED_JOIN                      : 'Table.NestedJoin';
+TABLE_EXPAND_TABLE_COLUMN              : 'Table.ExpandTableColumn';
 
 fragment NUMBER_LITERAL     : DECIMAL_NUMBER_LITERAL | HEX_NUMBER_LITERAL;
 LITERAL                     : LOGICAL_LITERAL | NUMBER_LITERAL | TEXT_LITERAL | NULL_LITERAL | VERBATIM_LITERAL;

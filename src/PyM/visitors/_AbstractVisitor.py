@@ -6,3 +6,4 @@ class AbstractVisitor(PowerQueryParserVisitor):
         self.tables: list[str] = []
         self.columns:list[str] = []
         self.other_identifiers: list[str] = []
+        

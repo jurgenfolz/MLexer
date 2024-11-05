@@ -1,6 +1,6 @@
-# Generated from C:/Users/KlausFolz/Desktop/GD/Repositories/MLexer/src/PyM/PowerQueryParser.g4 by ANTLR 4.13.2
+# Generated from src/PyM/PowerQueryParser.g4 by ANTLR 4.10.1
 from antlr4 import *
-if "." in __name__:
+if __name__ is not None and "." in __name__:
     from .PowerQueryParser import PowerQueryParser
 else:
     from PowerQueryParser import PowerQueryParser
@@ -68,6 +68,15 @@ class PowerQueryParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by PowerQueryParser#tableNestedJoinFunction.
     def exitTableNestedJoinFunction(self, ctx:PowerQueryParser.TableNestedJoinFunctionContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#tableExpandTableColumnFunction.
+    def enterTableExpandTableColumnFunction(self, ctx:PowerQueryParser.TableExpandTableColumnFunctionContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#tableExpandTableColumnFunction.
+    def exitTableExpandTableColumnFunction(self, ctx:PowerQueryParser.TableExpandTableColumnFunctionContext):
         pass
 
 

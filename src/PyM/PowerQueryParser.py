@@ -1,4 +1,4 @@
-# Generated from C:/Users/KlausFolz/Desktop/GD/Repositories/MLexer/src/PyM/PowerQueryParser.g4 by ANTLR 4.13.2
+# Generated from src/PyM/PowerQueryParser.g4 by ANTLR 4.10.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -10,37 +10,42 @@ else:
 
 def serializedATN():
     return [
-        4,1,73,104,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
-        6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,1,0,4,0,24,8,0,11,0,12,0,25,
-        1,0,1,0,1,1,1,1,3,1,32,8,1,1,2,1,2,1,2,1,2,1,2,1,3,1,3,1,3,5,3,42,
-        8,3,10,3,12,3,45,9,3,1,4,1,4,1,4,1,4,1,5,1,5,3,5,53,8,5,1,6,1,6,
-        1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,3,6,68,8,6,1,6,1,6,3,
-        6,72,8,6,1,6,1,6,1,7,1,7,1,7,1,7,5,7,80,8,7,10,7,12,7,83,9,7,1,7,
-        1,7,1,8,1,8,1,8,3,8,90,8,8,1,8,1,8,1,9,1,9,1,9,5,9,97,8,9,10,9,12,
-        9,100,9,9,1,10,1,10,1,10,0,0,11,0,2,4,6,8,10,12,14,16,18,20,0,0,
-        101,0,23,1,0,0,0,2,31,1,0,0,0,4,33,1,0,0,0,6,38,1,0,0,0,8,46,1,0,
-        0,0,10,52,1,0,0,0,12,54,1,0,0,0,14,75,1,0,0,0,16,86,1,0,0,0,18,93,
-        1,0,0,0,20,101,1,0,0,0,22,24,3,2,1,0,23,22,1,0,0,0,24,25,1,0,0,0,
-        25,23,1,0,0,0,25,26,1,0,0,0,26,27,1,0,0,0,27,28,5,0,0,1,28,1,1,0,
-        0,0,29,32,3,4,2,0,30,32,3,10,5,0,31,29,1,0,0,0,31,30,1,0,0,0,32,
-        3,1,0,0,0,33,34,5,29,0,0,34,35,3,6,3,0,35,36,5,30,0,0,36,37,3,10,
-        5,0,37,5,1,0,0,0,38,43,3,8,4,0,39,40,5,6,0,0,40,42,3,8,4,0,41,39,
-        1,0,0,0,42,45,1,0,0,0,43,41,1,0,0,0,43,44,1,0,0,0,44,7,1,0,0,0,45,
-        43,1,0,0,0,46,47,5,70,0,0,47,48,5,5,0,0,48,49,3,10,5,0,49,9,1,0,
-        0,0,50,53,3,12,6,0,51,53,3,16,8,0,52,50,1,0,0,0,52,51,1,0,0,0,53,
-        11,1,0,0,0,54,55,5,66,0,0,55,56,5,11,0,0,56,57,5,70,0,0,57,58,5,
-        6,0,0,58,59,3,14,7,0,59,60,5,6,0,0,60,61,5,70,0,0,61,62,5,6,0,0,
-        62,63,3,14,7,0,63,64,5,6,0,0,64,67,5,67,0,0,65,66,5,6,0,0,66,68,
-        5,70,0,0,67,65,1,0,0,0,67,68,1,0,0,0,68,71,1,0,0,0,69,70,5,6,0,0,
-        70,72,5,70,0,0,71,69,1,0,0,0,71,72,1,0,0,0,72,73,1,0,0,0,73,74,5,
-        12,0,0,74,13,1,0,0,0,75,76,5,9,0,0,76,81,5,67,0,0,77,78,5,6,0,0,
-        78,80,5,67,0,0,79,77,1,0,0,0,80,83,1,0,0,0,81,79,1,0,0,0,81,82,1,
-        0,0,0,82,84,1,0,0,0,83,81,1,0,0,0,84,85,5,10,0,0,85,15,1,0,0,0,86,
-        87,5,70,0,0,87,89,5,11,0,0,88,90,3,18,9,0,89,88,1,0,0,0,89,90,1,
-        0,0,0,90,91,1,0,0,0,91,92,5,12,0,0,92,17,1,0,0,0,93,98,3,10,5,0,
-        94,95,5,6,0,0,95,97,3,10,5,0,96,94,1,0,0,0,97,100,1,0,0,0,98,96,
-        1,0,0,0,98,99,1,0,0,0,99,19,1,0,0,0,100,98,1,0,0,0,101,102,1,0,0,
-        0,102,21,1,0,0,0,9,25,31,43,52,67,71,81,89,98
+        4,1,74,117,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,1,0,4,0,26,8,0,11,
+        0,12,0,27,1,0,1,0,1,1,1,1,3,1,34,8,1,1,2,1,2,1,2,1,2,1,2,1,3,1,3,
+        1,3,5,3,44,8,3,10,3,12,3,47,9,3,1,4,1,4,1,4,1,4,1,5,1,5,3,5,55,8,
+        5,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,3,6,70,8,6,
+        1,6,1,6,3,6,74,8,6,1,6,1,6,1,7,1,7,1,7,1,7,1,7,1,7,1,7,3,7,85,8,
+        7,1,7,1,7,1,8,1,8,1,8,1,8,5,8,93,8,8,10,8,12,8,96,9,8,1,8,1,8,1,
+        9,1,9,1,9,3,9,103,8,9,1,9,1,9,1,10,1,10,1,10,5,10,110,8,10,10,10,
+        12,10,113,9,10,1,11,1,11,1,11,0,0,12,0,2,4,6,8,10,12,14,16,18,20,
+        22,0,0,114,0,25,1,0,0,0,2,33,1,0,0,0,4,35,1,0,0,0,6,40,1,0,0,0,8,
+        48,1,0,0,0,10,54,1,0,0,0,12,56,1,0,0,0,14,77,1,0,0,0,16,88,1,0,0,
+        0,18,99,1,0,0,0,20,106,1,0,0,0,22,114,1,0,0,0,24,26,3,2,1,0,25,24,
+        1,0,0,0,26,27,1,0,0,0,27,25,1,0,0,0,27,28,1,0,0,0,28,29,1,0,0,0,
+        29,30,5,0,0,1,30,1,1,0,0,0,31,34,3,4,2,0,32,34,3,10,5,0,33,31,1,
+        0,0,0,33,32,1,0,0,0,34,3,1,0,0,0,35,36,5,29,0,0,36,37,3,6,3,0,37,
+        38,5,30,0,0,38,39,3,10,5,0,39,5,1,0,0,0,40,45,3,8,4,0,41,42,5,6,
+        0,0,42,44,3,8,4,0,43,41,1,0,0,0,44,47,1,0,0,0,45,43,1,0,0,0,45,46,
+        1,0,0,0,46,7,1,0,0,0,47,45,1,0,0,0,48,49,5,71,0,0,49,50,5,5,0,0,
+        50,51,3,10,5,0,51,9,1,0,0,0,52,55,3,12,6,0,53,55,3,18,9,0,54,52,
+        1,0,0,0,54,53,1,0,0,0,55,11,1,0,0,0,56,57,5,66,0,0,57,58,5,11,0,
+        0,58,59,5,71,0,0,59,60,5,6,0,0,60,61,3,16,8,0,61,62,5,6,0,0,62,63,
+        5,71,0,0,63,64,5,6,0,0,64,65,3,16,8,0,65,66,5,6,0,0,66,69,5,68,0,
+        0,67,68,5,6,0,0,68,70,5,71,0,0,69,67,1,0,0,0,69,70,1,0,0,0,70,73,
+        1,0,0,0,71,72,5,6,0,0,72,74,5,71,0,0,73,71,1,0,0,0,73,74,1,0,0,0,
+        74,75,1,0,0,0,75,76,5,12,0,0,76,13,1,0,0,0,77,78,5,67,0,0,78,79,
+        5,11,0,0,79,80,5,71,0,0,80,81,5,6,0,0,81,84,3,16,8,0,82,83,5,6,0,
+        0,83,85,3,16,8,0,84,82,1,0,0,0,84,85,1,0,0,0,85,86,1,0,0,0,86,87,
+        5,12,0,0,87,15,1,0,0,0,88,89,5,9,0,0,89,94,5,68,0,0,90,91,5,6,0,
+        0,91,93,5,68,0,0,92,90,1,0,0,0,93,96,1,0,0,0,94,92,1,0,0,0,94,95,
+        1,0,0,0,95,97,1,0,0,0,96,94,1,0,0,0,97,98,5,10,0,0,98,17,1,0,0,0,
+        99,100,5,71,0,0,100,102,5,11,0,0,101,103,3,20,10,0,102,101,1,0,0,
+        0,102,103,1,0,0,0,103,104,1,0,0,0,104,105,5,12,0,0,105,19,1,0,0,
+        0,106,111,3,10,5,0,107,108,5,6,0,0,108,110,3,10,5,0,109,107,1,0,
+        0,0,110,113,1,0,0,0,111,109,1,0,0,0,111,112,1,0,0,0,112,21,1,0,0,
+        0,113,111,1,0,0,0,114,115,1,0,0,0,115,23,1,0,0,0,10,27,33,45,54,
+        69,73,84,94,102,111
     ]
 
 class PowerQueryParser ( Parser ):
@@ -64,7 +69,8 @@ class PowerQueryParser ( Parser ):
                      "'any'", "'anynonnull'", "'binary'", "'date'", "'datetime'", 
                      "'@'", "'as'", "'=>'", "'..'", "'!'", "'not'", "'+'", 
                      "'-'", "'meta'", "'is'", "'<>'", "'>'", "'<'", "'/'", 
-                     "'*'", "'&'", "'<='", "'>='", "'Table.NestedJoin'" ]
+                     "'*'", "'&'", "'<='", "'>='", "'Table.NestedJoin'", 
+                     "'Table.ExpandTableColumn'" ]
 
     symbolicNames = [ "<INVALID>", "WHITESPACE", "NEW_LINE_CHAR", "COMMENT", 
                       "CHARACHTER_ESCAPE_SEQUENCE", "EQUALS", "COMMA", "OPEN_BRACKET", 
@@ -78,8 +84,8 @@ class PowerQueryParser ( Parser ):
                       "ANYNONNULL", "BINARY", "DATE", "DATETIME", "AT", 
                       "AS", "ARROW", "DOTDOT", "BANG", "NOT", "PLUS", "MINUS", 
                       "META", "IS", "NEQ", "GE", "LE", "SLASH", "STAR", 
-                      "AMP", "LEQ", "GEQ", "TABLE_NESTED_JOIN", "LITERAL", 
-                      "TEXT_LITERAL", "COLUMN_REFERENCE", "IDENTIFIER", 
+                      "AMP", "LEQ", "GEQ", "TABLE_NESTED_JOIN", "TABLE_EXPAND_TABLE_COLUMN", 
+                      "LITERAL", "TEXT_LITERAL", "COLUMN_REFERENCE", "IDENTIFIER", 
                       "REGULAR_IDENTIFIER", "AVAILABLE_IDENTIFIER", "KEYWORD_OR_IDENTIFIER" ]
 
     RULE_program = 0
@@ -89,14 +95,16 @@ class PowerQueryParser ( Parser ):
     RULE_assignment = 4
     RULE_expression = 5
     RULE_tableNestedJoinFunction = 6
-    RULE_literalList = 7
-    RULE_functionCall = 8
-    RULE_argumentList = 9
-    RULE_otherExpression = 10
+    RULE_tableExpandTableColumnFunction = 7
+    RULE_literalList = 8
+    RULE_functionCall = 9
+    RULE_argumentList = 10
+    RULE_otherExpression = 11
 
     ruleNames =  [ "program", "statement", "letExpression", "assignmentList", 
                    "assignment", "expression", "tableNestedJoinFunction", 
-                   "literalList", "functionCall", "argumentList", "otherExpression" ]
+                   "tableExpandTableColumnFunction", "literalList", "functionCall", 
+                   "argumentList", "otherExpression" ]
 
     EOF = Token.EOF
     WHITESPACE=1
@@ -165,17 +173,18 @@ class PowerQueryParser ( Parser ):
     LEQ=64
     GEQ=65
     TABLE_NESTED_JOIN=66
-    LITERAL=67
-    TEXT_LITERAL=68
-    COLUMN_REFERENCE=69
-    IDENTIFIER=70
-    REGULAR_IDENTIFIER=71
-    AVAILABLE_IDENTIFIER=72
-    KEYWORD_OR_IDENTIFIER=73
+    TABLE_EXPAND_TABLE_COLUMN=67
+    LITERAL=68
+    TEXT_LITERAL=69
+    COLUMN_REFERENCE=70
+    IDENTIFIER=71
+    REGULAR_IDENTIFIER=72
+    AVAILABLE_IDENTIFIER=73
+    KEYWORD_OR_IDENTIFIER=74
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.13.2")
+        self.checkVersion("4.10.1")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -226,19 +235,19 @@ class PowerQueryParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 23 
+            self.state = 25 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 22
+                self.state = 24
                 self.statement()
-                self.state = 25 
+                self.state = 27 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (((((_la - 29)) & ~0x3f) == 0 and ((1 << (_la - 29)) & 2336462209025) != 0)):
+                if not (((((_la - 29)) & ~0x3f) == 0 and ((1 << (_la - 29)) & ((1 << (PowerQueryParser.LET - 29)) | (1 << (PowerQueryParser.TABLE_NESTED_JOIN - 29)) | (1 << (PowerQueryParser.IDENTIFIER - 29)))) != 0)):
                     break
 
-            self.state = 27
+            self.state = 29
             self.match(PowerQueryParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
@@ -289,17 +298,17 @@ class PowerQueryParser ( Parser ):
         localctx = PowerQueryParser.StatementContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_statement)
         try:
-            self.state = 31
+            self.state = 33
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [29]:
+            if token in [PowerQueryParser.LET]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 29
+                self.state = 31
                 self.letExpression()
                 pass
-            elif token in [66, 70]:
+            elif token in [PowerQueryParser.TABLE_NESTED_JOIN, PowerQueryParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 30
+                self.state = 32
                 self.expression()
                 pass
             else:
@@ -361,13 +370,13 @@ class PowerQueryParser ( Parser ):
         self.enterRule(localctx, 4, self.RULE_letExpression)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 33
-            self.match(PowerQueryParser.LET)
-            self.state = 34
-            self.assignmentList()
             self.state = 35
-            self.match(PowerQueryParser.IN)
+            self.match(PowerQueryParser.LET)
             self.state = 36
+            self.assignmentList()
+            self.state = 37
+            self.match(PowerQueryParser.IN)
+            self.state = 38
             self.expression()
         except RecognitionException as re:
             localctx.exception = re
@@ -425,17 +434,17 @@ class PowerQueryParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 38
+            self.state = 40
             self.assignment()
-            self.state = 43
+            self.state = 45
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==6:
-                self.state = 39
+            while _la==PowerQueryParser.COMMA:
+                self.state = 41
                 self.match(PowerQueryParser.COMMA)
-                self.state = 40
+                self.state = 42
                 self.assignment()
-                self.state = 45
+                self.state = 47
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -491,11 +500,11 @@ class PowerQueryParser ( Parser ):
         self.enterRule(localctx, 8, self.RULE_assignment)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 46
-            self.match(PowerQueryParser.IDENTIFIER)
-            self.state = 47
-            self.match(PowerQueryParser.EQUALS)
             self.state = 48
+            self.match(PowerQueryParser.IDENTIFIER)
+            self.state = 49
+            self.match(PowerQueryParser.EQUALS)
+            self.state = 50
             self.expression()
         except RecognitionException as re:
             localctx.exception = re
@@ -546,17 +555,17 @@ class PowerQueryParser ( Parser ):
         localctx = PowerQueryParser.ExpressionContext(self, self._ctx, self.state)
         self.enterRule(localctx, 10, self.RULE_expression)
         try:
-            self.state = 52
+            self.state = 54
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [66]:
+            if token in [PowerQueryParser.TABLE_NESTED_JOIN]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 50
+                self.state = 52
                 self.tableNestedJoinFunction()
                 pass
-            elif token in [70]:
+            elif token in [PowerQueryParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 51
+                self.state = 53
                 self.functionCall()
                 pass
             else:
@@ -643,49 +652,142 @@ class PowerQueryParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 54
-            self.match(PowerQueryParser.TABLE_NESTED_JOIN)
-            self.state = 55
-            self.match(PowerQueryParser.OPEN_PAREN)
             self.state = 56
-            localctx.firstTable = self.match(PowerQueryParser.IDENTIFIER)
+            self.match(PowerQueryParser.TABLE_NESTED_JOIN)
             self.state = 57
-            self.match(PowerQueryParser.COMMA)
+            self.match(PowerQueryParser.OPEN_PAREN)
             self.state = 58
-            localctx.firstKeyColumns = self.literalList()
+            localctx.firstTable = self.match(PowerQueryParser.IDENTIFIER)
             self.state = 59
             self.match(PowerQueryParser.COMMA)
             self.state = 60
-            localctx.secondTable = self.match(PowerQueryParser.IDENTIFIER)
+            localctx.firstKeyColumns = self.literalList()
             self.state = 61
             self.match(PowerQueryParser.COMMA)
             self.state = 62
-            localctx.secondKeyColumns = self.literalList()
+            localctx.secondTable = self.match(PowerQueryParser.IDENTIFIER)
             self.state = 63
             self.match(PowerQueryParser.COMMA)
             self.state = 64
+            localctx.secondKeyColumns = self.literalList()
+            self.state = 65
+            self.match(PowerQueryParser.COMMA)
+            self.state = 66
             localctx.newColumnName = self.match(PowerQueryParser.LITERAL)
-            self.state = 67
+            self.state = 69
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
             if la_ == 1:
-                self.state = 65
+                self.state = 67
                 self.match(PowerQueryParser.COMMA)
-                self.state = 66
+                self.state = 68
                 localctx.joinKind = self.match(PowerQueryParser.IDENTIFIER)
 
 
-            self.state = 71
+            self.state = 73
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==6:
-                self.state = 69
+            if _la==PowerQueryParser.COMMA:
+                self.state = 71
                 self.match(PowerQueryParser.COMMA)
-                self.state = 70
+                self.state = 72
                 localctx.keyEqualityComparer = self.match(PowerQueryParser.IDENTIFIER)
 
 
-            self.state = 73
+            self.state = 75
+            self.match(PowerQueryParser.CLOSE_PAREN)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class TableExpandTableColumnFunctionContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+            self.table = None # Token
+            self.columnsList = None # LiteralListContext
+            self.NewColumnNamesList = None # LiteralListContext
+
+        def TABLE_EXPAND_TABLE_COLUMN(self):
+            return self.getToken(PowerQueryParser.TABLE_EXPAND_TABLE_COLUMN, 0)
+
+        def OPEN_PAREN(self):
+            return self.getToken(PowerQueryParser.OPEN_PAREN, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(PowerQueryParser.COMMA)
+            else:
+                return self.getToken(PowerQueryParser.COMMA, i)
+
+        def CLOSE_PAREN(self):
+            return self.getToken(PowerQueryParser.CLOSE_PAREN, 0)
+
+        def IDENTIFIER(self):
+            return self.getToken(PowerQueryParser.IDENTIFIER, 0)
+
+        def literalList(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(PowerQueryParser.LiteralListContext)
+            else:
+                return self.getTypedRuleContext(PowerQueryParser.LiteralListContext,i)
+
+
+        def getRuleIndex(self):
+            return PowerQueryParser.RULE_tableExpandTableColumnFunction
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterTableExpandTableColumnFunction" ):
+                listener.enterTableExpandTableColumnFunction(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitTableExpandTableColumnFunction" ):
+                listener.exitTableExpandTableColumnFunction(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitTableExpandTableColumnFunction" ):
+                return visitor.visitTableExpandTableColumnFunction(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def tableExpandTableColumnFunction(self):
+
+        localctx = PowerQueryParser.TableExpandTableColumnFunctionContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 14, self.RULE_tableExpandTableColumnFunction)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 77
+            self.match(PowerQueryParser.TABLE_EXPAND_TABLE_COLUMN)
+            self.state = 78
+            self.match(PowerQueryParser.OPEN_PAREN)
+            self.state = 79
+            localctx.table = self.match(PowerQueryParser.IDENTIFIER)
+            self.state = 80
+            self.match(PowerQueryParser.COMMA)
+            self.state = 81
+            localctx.columnsList = self.literalList()
+            self.state = 84
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==PowerQueryParser.COMMA:
+                self.state = 82
+                self.match(PowerQueryParser.COMMA)
+                self.state = 83
+                localctx.NewColumnNamesList = self.literalList()
+
+
+            self.state = 86
             self.match(PowerQueryParser.CLOSE_PAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -744,27 +846,27 @@ class PowerQueryParser ( Parser ):
     def literalList(self):
 
         localctx = PowerQueryParser.LiteralListContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_literalList)
+        self.enterRule(localctx, 16, self.RULE_literalList)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 75
+            self.state = 88
             self.match(PowerQueryParser.OPEN_BRACE)
-            self.state = 76
+            self.state = 89
             self.match(PowerQueryParser.LITERAL)
-            self.state = 81
+            self.state = 94
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==6:
-                self.state = 77
+            while _la==PowerQueryParser.COMMA:
+                self.state = 90
                 self.match(PowerQueryParser.COMMA)
-                self.state = 78
+                self.state = 91
                 self.match(PowerQueryParser.LITERAL)
-                self.state = 83
+                self.state = 96
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 84
+            self.state = 97
             self.match(PowerQueryParser.CLOSE_BRACE)
         except RecognitionException as re:
             localctx.exception = re
@@ -818,23 +920,23 @@ class PowerQueryParser ( Parser ):
     def functionCall(self):
 
         localctx = PowerQueryParser.FunctionCallContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_functionCall)
+        self.enterRule(localctx, 18, self.RULE_functionCall)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 86
+            self.state = 99
             self.match(PowerQueryParser.IDENTIFIER)
-            self.state = 87
+            self.state = 100
             self.match(PowerQueryParser.OPEN_PAREN)
-            self.state = 89
+            self.state = 102
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==66 or _la==70:
-                self.state = 88
+            if _la==PowerQueryParser.TABLE_NESTED_JOIN or _la==PowerQueryParser.IDENTIFIER:
+                self.state = 101
                 self.argumentList()
 
 
-            self.state = 91
+            self.state = 104
             self.match(PowerQueryParser.CLOSE_PAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -888,21 +990,21 @@ class PowerQueryParser ( Parser ):
     def argumentList(self):
 
         localctx = PowerQueryParser.ArgumentListContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_argumentList)
+        self.enterRule(localctx, 20, self.RULE_argumentList)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 93
+            self.state = 106
             self.expression()
-            self.state = 98
+            self.state = 111
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==6:
-                self.state = 94
+            while _la==PowerQueryParser.COMMA:
+                self.state = 107
                 self.match(PowerQueryParser.COMMA)
-                self.state = 95
+                self.state = 108
                 self.expression()
-                self.state = 100
+                self.state = 113
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -946,7 +1048,7 @@ class PowerQueryParser ( Parser ):
     def otherExpression(self):
 
         localctx = PowerQueryParser.OtherExpressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_otherExpression)
+        self.enterRule(localctx, 22, self.RULE_otherExpression)
         try:
             self.enterOuterAlt(localctx, 1)
 
