@@ -157,7 +157,7 @@ public class PowerQueryParser extends Parser {
 				setState(27); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( ((((_la - 29)) & ~0x3f) == 0 && ((1L << (_la - 29)) & 4535485464577L) != 0) );
+			} while ( ((((_la - 29)) & ~0x3f) == 0 && ((1L << (_la - 29)) & 4810363371521L) != 0) );
 			setState(29);
 			match(EOF);
 			}
@@ -202,6 +202,7 @@ public class PowerQueryParser extends Parser {
 				}
 				break;
 			case TABLE_NESTED_JOIN:
+			case TABLE_EXPAND_TABLE_COLUMN:
 			case IDENTIFIER:
 				enterOuterAlt(_localctx, 2);
 				{
@@ -366,6 +367,9 @@ public class PowerQueryParser extends Parser {
 		public TableNestedJoinFunctionContext tableNestedJoinFunction() {
 			return getRuleContext(TableNestedJoinFunctionContext.class,0);
 		}
+		public TableExpandTableColumnFunctionContext tableExpandTableColumnFunction() {
+			return getRuleContext(TableExpandTableColumnFunctionContext.class,0);
+		}
 		public FunctionCallContext functionCall() {
 			return getRuleContext(FunctionCallContext.class,0);
 		}
@@ -379,7 +383,7 @@ public class PowerQueryParser extends Parser {
 		ExpressionContext _localctx = new ExpressionContext(_ctx, getState());
 		enterRule(_localctx, 10, RULE_expression);
 		try {
-			setState(54);
+			setState(55);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TABLE_NESTED_JOIN:
@@ -389,10 +393,17 @@ public class PowerQueryParser extends Parser {
 				tableNestedJoinFunction();
 				}
 				break;
-			case IDENTIFIER:
+			case TABLE_EXPAND_TABLE_COLUMN:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(53);
+				tableExpandTableColumnFunction();
+				}
+				break;
+			case IDENTIFIER:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(54);
 				functionCall();
 				}
 				break;
@@ -451,53 +462,53 @@ public class PowerQueryParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(56);
-			match(TABLE_NESTED_JOIN);
 			setState(57);
-			match(OPEN_PAREN);
+			match(TABLE_NESTED_JOIN);
 			setState(58);
-			((TableNestedJoinFunctionContext)_localctx).firstTable = match(IDENTIFIER);
+			match(OPEN_PAREN);
 			setState(59);
-			match(COMMA);
+			((TableNestedJoinFunctionContext)_localctx).firstTable = match(IDENTIFIER);
 			setState(60);
-			((TableNestedJoinFunctionContext)_localctx).firstKeyColumns = literalList();
+			match(COMMA);
 			setState(61);
-			match(COMMA);
+			((TableNestedJoinFunctionContext)_localctx).firstKeyColumns = literalList();
 			setState(62);
-			((TableNestedJoinFunctionContext)_localctx).secondTable = match(IDENTIFIER);
+			match(COMMA);
 			setState(63);
-			match(COMMA);
+			((TableNestedJoinFunctionContext)_localctx).secondTable = match(IDENTIFIER);
 			setState(64);
-			((TableNestedJoinFunctionContext)_localctx).secondKeyColumns = literalList();
-			setState(65);
 			match(COMMA);
+			setState(65);
+			((TableNestedJoinFunctionContext)_localctx).secondKeyColumns = literalList();
 			setState(66);
+			match(COMMA);
+			setState(67);
 			((TableNestedJoinFunctionContext)_localctx).newColumnName = match(LITERAL);
-			setState(69);
+			setState(70);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
 				{
-				setState(67);
-				match(COMMA);
 				setState(68);
+				match(COMMA);
+				setState(69);
 				((TableNestedJoinFunctionContext)_localctx).joinKind = match(IDENTIFIER);
 				}
 				break;
 			}
-			setState(73);
+			setState(74);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==COMMA) {
 				{
-				setState(71);
-				match(COMMA);
 				setState(72);
+				match(COMMA);
+				setState(73);
 				((TableNestedJoinFunctionContext)_localctx).keyEqualityComparer = match(IDENTIFIER);
 				}
 			}
 
-			setState(75);
+			setState(76);
 			match(CLOSE_PAREN);
 			}
 		}
@@ -515,6 +526,7 @@ public class PowerQueryParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class TableExpandTableColumnFunctionContext extends ParserRuleContext {
 		public Token table;
+		public Token column;
 		public LiteralListContext columnsList;
 		public LiteralListContext NewColumnNamesList;
 		public TerminalNode TABLE_EXPAND_TABLE_COLUMN() { return getToken(PowerQueryParser.TABLE_EXPAND_TABLE_COLUMN, 0); }
@@ -525,6 +537,7 @@ public class PowerQueryParser extends Parser {
 		}
 		public TerminalNode CLOSE_PAREN() { return getToken(PowerQueryParser.CLOSE_PAREN, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(PowerQueryParser.IDENTIFIER, 0); }
+		public TerminalNode LITERAL() { return getToken(PowerQueryParser.LITERAL, 0); }
 		public List<LiteralListContext> literalList() {
 			return getRuleContexts(LiteralListContext.class);
 		}
@@ -544,29 +557,33 @@ public class PowerQueryParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(77);
-			match(TABLE_EXPAND_TABLE_COLUMN);
 			setState(78);
-			match(OPEN_PAREN);
+			match(TABLE_EXPAND_TABLE_COLUMN);
 			setState(79);
-			((TableExpandTableColumnFunctionContext)_localctx).table = match(IDENTIFIER);
+			match(OPEN_PAREN);
 			setState(80);
-			match(COMMA);
+			((TableExpandTableColumnFunctionContext)_localctx).table = match(IDENTIFIER);
 			setState(81);
-			((TableExpandTableColumnFunctionContext)_localctx).columnsList = literalList();
+			match(COMMA);
+			setState(82);
+			((TableExpandTableColumnFunctionContext)_localctx).column = match(LITERAL);
+			setState(83);
+			match(COMMA);
 			setState(84);
+			((TableExpandTableColumnFunctionContext)_localctx).columnsList = literalList();
+			setState(87);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==COMMA) {
 				{
-				setState(82);
+				setState(85);
 				match(COMMA);
-				setState(83);
+				setState(86);
 				((TableExpandTableColumnFunctionContext)_localctx).NewColumnNamesList = literalList();
 				}
 			}
 
-			setState(86);
+			setState(89);
 			match(CLOSE_PAREN);
 			}
 		}
@@ -606,27 +623,27 @@ public class PowerQueryParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(88);
+			setState(91);
 			match(OPEN_BRACE);
-			setState(89);
+			setState(92);
 			match(LITERAL);
-			setState(94);
+			setState(97);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(90);
+				setState(93);
 				match(COMMA);
-				setState(91);
+				setState(94);
 				match(LITERAL);
 				}
 				}
-				setState(96);
+				setState(99);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(97);
+			setState(100);
 			match(CLOSE_BRACE);
 			}
 		}
@@ -662,21 +679,21 @@ public class PowerQueryParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(99);
-			match(IDENTIFIER);
-			setState(100);
-			match(OPEN_PAREN);
 			setState(102);
+			match(IDENTIFIER);
+			setState(103);
+			match(OPEN_PAREN);
+			setState(105);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==TABLE_NESTED_JOIN || _la==IDENTIFIER) {
+			if (((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 35L) != 0)) {
 				{
-				setState(101);
+				setState(104);
 				argumentList();
 				}
 			}
 
-			setState(104);
+			setState(107);
 			match(CLOSE_PAREN);
 			}
 		}
@@ -716,21 +733,21 @@ public class PowerQueryParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(106);
+			setState(109);
 			expression();
-			setState(111);
+			setState(114);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(107);
+				setState(110);
 				match(COMMA);
-				setState(108);
+				setState(111);
 				expression();
 				}
 				}
-				setState(113);
+				setState(116);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -775,7 +792,7 @@ public class PowerQueryParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001Ju\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002\u0002"+
+		"\u0004\u0001Jx\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002\u0002"+
 		"\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002\u0005"+
 		"\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002\b\u0007"+
 		"\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0001\u0000"+
@@ -783,60 +800,61 @@ public class PowerQueryParser extends Parser {
 		"\u0000\u0001\u0001\u0001\u0001\u0003\u0001\"\b\u0001\u0001\u0002\u0001"+
 		"\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0003\u0001\u0003\u0001"+
 		"\u0003\u0005\u0003,\b\u0003\n\u0003\f\u0003/\t\u0003\u0001\u0004\u0001"+
-		"\u0004\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005\u0003\u00057\b"+
-		"\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0003"+
+		"\u00058\b\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001"+
 		"\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001"+
-		"\u0006\u0001\u0006\u0003\u0006F\b\u0006\u0001\u0006\u0001\u0006\u0003"+
-		"\u0006J\b\u0006\u0001\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0001"+
-		"\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0003\u0007U\b"+
-		"\u0007\u0001\u0007\u0001\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0005\b"+
-		"]\b\b\n\b\f\b`\t\b\u0001\b\u0001\b\u0001\t\u0001\t\u0001\t\u0003\tg\b"+
-		"\t\u0001\t\u0001\t\u0001\n\u0001\n\u0001\n\u0005\nn\b\n\n\n\f\nq\t\n\u0001"+
-		"\u000b\u0001\u000b\u0001\u000b\u0000\u0000\f\u0000\u0002\u0004\u0006\b"+
-		"\n\f\u000e\u0010\u0012\u0014\u0016\u0000\u0000r\u0000\u0019\u0001\u0000"+
-		"\u0000\u0000\u0002!\u0001\u0000\u0000\u0000\u0004#\u0001\u0000\u0000\u0000"+
-		"\u0006(\u0001\u0000\u0000\u0000\b0\u0001\u0000\u0000\u0000\n6\u0001\u0000"+
-		"\u0000\u0000\f8\u0001\u0000\u0000\u0000\u000eM\u0001\u0000\u0000\u0000"+
-		"\u0010X\u0001\u0000\u0000\u0000\u0012c\u0001\u0000\u0000\u0000\u0014j"+
-		"\u0001\u0000\u0000\u0000\u0016r\u0001\u0000\u0000\u0000\u0018\u001a\u0003"+
-		"\u0002\u0001\u0000\u0019\u0018\u0001\u0000\u0000\u0000\u001a\u001b\u0001"+
-		"\u0000\u0000\u0000\u001b\u0019\u0001\u0000\u0000\u0000\u001b\u001c\u0001"+
-		"\u0000\u0000\u0000\u001c\u001d\u0001\u0000\u0000\u0000\u001d\u001e\u0005"+
-		"\u0000\u0000\u0001\u001e\u0001\u0001\u0000\u0000\u0000\u001f\"\u0003\u0004"+
-		"\u0002\u0000 \"\u0003\n\u0005\u0000!\u001f\u0001\u0000\u0000\u0000! \u0001"+
-		"\u0000\u0000\u0000\"\u0003\u0001\u0000\u0000\u0000#$\u0005\u001d\u0000"+
-		"\u0000$%\u0003\u0006\u0003\u0000%&\u0005\u001e\u0000\u0000&\'\u0003\n"+
-		"\u0005\u0000\'\u0005\u0001\u0000\u0000\u0000(-\u0003\b\u0004\u0000)*\u0005"+
-		"\u0006\u0000\u0000*,\u0003\b\u0004\u0000+)\u0001\u0000\u0000\u0000,/\u0001"+
-		"\u0000\u0000\u0000-+\u0001\u0000\u0000\u0000-.\u0001\u0000\u0000\u0000"+
-		".\u0007\u0001\u0000\u0000\u0000/-\u0001\u0000\u0000\u000001\u0005G\u0000"+
-		"\u000012\u0005\u0005\u0000\u000023\u0003\n\u0005\u00003\t\u0001\u0000"+
-		"\u0000\u000047\u0003\f\u0006\u000057\u0003\u0012\t\u000064\u0001\u0000"+
-		"\u0000\u000065\u0001\u0000\u0000\u00007\u000b\u0001\u0000\u0000\u0000"+
-		"89\u0005B\u0000\u00009:\u0005\u000b\u0000\u0000:;\u0005G\u0000\u0000;"+
-		"<\u0005\u0006\u0000\u0000<=\u0003\u0010\b\u0000=>\u0005\u0006\u0000\u0000"+
-		">?\u0005G\u0000\u0000?@\u0005\u0006\u0000\u0000@A\u0003\u0010\b\u0000"+
-		"AB\u0005\u0006\u0000\u0000BE\u0005D\u0000\u0000CD\u0005\u0006\u0000\u0000"+
-		"DF\u0005G\u0000\u0000EC\u0001\u0000\u0000\u0000EF\u0001\u0000\u0000\u0000"+
-		"FI\u0001\u0000\u0000\u0000GH\u0005\u0006\u0000\u0000HJ\u0005G\u0000\u0000"+
-		"IG\u0001\u0000\u0000\u0000IJ\u0001\u0000\u0000\u0000JK\u0001\u0000\u0000"+
-		"\u0000KL\u0005\f\u0000\u0000L\r\u0001\u0000\u0000\u0000MN\u0005C\u0000"+
-		"\u0000NO\u0005\u000b\u0000\u0000OP\u0005G\u0000\u0000PQ\u0005\u0006\u0000"+
-		"\u0000QT\u0003\u0010\b\u0000RS\u0005\u0006\u0000\u0000SU\u0003\u0010\b"+
-		"\u0000TR\u0001\u0000\u0000\u0000TU\u0001\u0000\u0000\u0000UV\u0001\u0000"+
-		"\u0000\u0000VW\u0005\f\u0000\u0000W\u000f\u0001\u0000\u0000\u0000XY\u0005"+
-		"\t\u0000\u0000Y^\u0005D\u0000\u0000Z[\u0005\u0006\u0000\u0000[]\u0005"+
-		"D\u0000\u0000\\Z\u0001\u0000\u0000\u0000]`\u0001\u0000\u0000\u0000^\\"+
-		"\u0001\u0000\u0000\u0000^_\u0001\u0000\u0000\u0000_a\u0001\u0000\u0000"+
-		"\u0000`^\u0001\u0000\u0000\u0000ab\u0005\n\u0000\u0000b\u0011\u0001\u0000"+
-		"\u0000\u0000cd\u0005G\u0000\u0000df\u0005\u000b\u0000\u0000eg\u0003\u0014"+
-		"\n\u0000fe\u0001\u0000\u0000\u0000fg\u0001\u0000\u0000\u0000gh\u0001\u0000"+
-		"\u0000\u0000hi\u0005\f\u0000\u0000i\u0013\u0001\u0000\u0000\u0000jo\u0003"+
-		"\n\u0005\u0000kl\u0005\u0006\u0000\u0000ln\u0003\n\u0005\u0000mk\u0001"+
-		"\u0000\u0000\u0000nq\u0001\u0000\u0000\u0000om\u0001\u0000\u0000\u0000"+
-		"op\u0001\u0000\u0000\u0000p\u0015\u0001\u0000\u0000\u0000qo\u0001\u0000"+
-		"\u0000\u0000rs\u0001\u0000\u0000\u0000s\u0017\u0001\u0000\u0000\u0000"+
-		"\n\u001b!-6EIT^fo";
+		"\u0006\u0001\u0006\u0001\u0006\u0003\u0006G\b\u0006\u0001\u0006\u0001"+
+		"\u0006\u0003\u0006K\b\u0006\u0001\u0006\u0001\u0006\u0001\u0007\u0001"+
+		"\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001"+
+		"\u0007\u0001\u0007\u0003\u0007X\b\u0007\u0001\u0007\u0001\u0007\u0001"+
+		"\b\u0001\b\u0001\b\u0001\b\u0005\b`\b\b\n\b\f\bc\t\b\u0001\b\u0001\b\u0001"+
+		"\t\u0001\t\u0001\t\u0003\tj\b\t\u0001\t\u0001\t\u0001\n\u0001\n\u0001"+
+		"\n\u0005\nq\b\n\n\n\f\nt\t\n\u0001\u000b\u0001\u000b\u0001\u000b\u0000"+
+		"\u0000\f\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0000"+
+		"\u0000v\u0000\u0019\u0001\u0000\u0000\u0000\u0002!\u0001\u0000\u0000\u0000"+
+		"\u0004#\u0001\u0000\u0000\u0000\u0006(\u0001\u0000\u0000\u0000\b0\u0001"+
+		"\u0000\u0000\u0000\n7\u0001\u0000\u0000\u0000\f9\u0001\u0000\u0000\u0000"+
+		"\u000eN\u0001\u0000\u0000\u0000\u0010[\u0001\u0000\u0000\u0000\u0012f"+
+		"\u0001\u0000\u0000\u0000\u0014m\u0001\u0000\u0000\u0000\u0016u\u0001\u0000"+
+		"\u0000\u0000\u0018\u001a\u0003\u0002\u0001\u0000\u0019\u0018\u0001\u0000"+
+		"\u0000\u0000\u001a\u001b\u0001\u0000\u0000\u0000\u001b\u0019\u0001\u0000"+
+		"\u0000\u0000\u001b\u001c\u0001\u0000\u0000\u0000\u001c\u001d\u0001\u0000"+
+		"\u0000\u0000\u001d\u001e\u0005\u0000\u0000\u0001\u001e\u0001\u0001\u0000"+
+		"\u0000\u0000\u001f\"\u0003\u0004\u0002\u0000 \"\u0003\n\u0005\u0000!\u001f"+
+		"\u0001\u0000\u0000\u0000! \u0001\u0000\u0000\u0000\"\u0003\u0001\u0000"+
+		"\u0000\u0000#$\u0005\u001d\u0000\u0000$%\u0003\u0006\u0003\u0000%&\u0005"+
+		"\u001e\u0000\u0000&\'\u0003\n\u0005\u0000\'\u0005\u0001\u0000\u0000\u0000"+
+		"(-\u0003\b\u0004\u0000)*\u0005\u0006\u0000\u0000*,\u0003\b\u0004\u0000"+
+		"+)\u0001\u0000\u0000\u0000,/\u0001\u0000\u0000\u0000-+\u0001\u0000\u0000"+
+		"\u0000-.\u0001\u0000\u0000\u0000.\u0007\u0001\u0000\u0000\u0000/-\u0001"+
+		"\u0000\u0000\u000001\u0005G\u0000\u000012\u0005\u0005\u0000\u000023\u0003"+
+		"\n\u0005\u00003\t\u0001\u0000\u0000\u000048\u0003\f\u0006\u000058\u0003"+
+		"\u000e\u0007\u000068\u0003\u0012\t\u000074\u0001\u0000\u0000\u000075\u0001"+
+		"\u0000\u0000\u000076\u0001\u0000\u0000\u00008\u000b\u0001\u0000\u0000"+
+		"\u00009:\u0005B\u0000\u0000:;\u0005\u000b\u0000\u0000;<\u0005G\u0000\u0000"+
+		"<=\u0005\u0006\u0000\u0000=>\u0003\u0010\b\u0000>?\u0005\u0006\u0000\u0000"+
+		"?@\u0005G\u0000\u0000@A\u0005\u0006\u0000\u0000AB\u0003\u0010\b\u0000"+
+		"BC\u0005\u0006\u0000\u0000CF\u0005D\u0000\u0000DE\u0005\u0006\u0000\u0000"+
+		"EG\u0005G\u0000\u0000FD\u0001\u0000\u0000\u0000FG\u0001\u0000\u0000\u0000"+
+		"GJ\u0001\u0000\u0000\u0000HI\u0005\u0006\u0000\u0000IK\u0005G\u0000\u0000"+
+		"JH\u0001\u0000\u0000\u0000JK\u0001\u0000\u0000\u0000KL\u0001\u0000\u0000"+
+		"\u0000LM\u0005\f\u0000\u0000M\r\u0001\u0000\u0000\u0000NO\u0005C\u0000"+
+		"\u0000OP\u0005\u000b\u0000\u0000PQ\u0005G\u0000\u0000QR\u0005\u0006\u0000"+
+		"\u0000RS\u0005D\u0000\u0000ST\u0005\u0006\u0000\u0000TW\u0003\u0010\b"+
+		"\u0000UV\u0005\u0006\u0000\u0000VX\u0003\u0010\b\u0000WU\u0001\u0000\u0000"+
+		"\u0000WX\u0001\u0000\u0000\u0000XY\u0001\u0000\u0000\u0000YZ\u0005\f\u0000"+
+		"\u0000Z\u000f\u0001\u0000\u0000\u0000[\\\u0005\t\u0000\u0000\\a\u0005"+
+		"D\u0000\u0000]^\u0005\u0006\u0000\u0000^`\u0005D\u0000\u0000_]\u0001\u0000"+
+		"\u0000\u0000`c\u0001\u0000\u0000\u0000a_\u0001\u0000\u0000\u0000ab\u0001"+
+		"\u0000\u0000\u0000bd\u0001\u0000\u0000\u0000ca\u0001\u0000\u0000\u0000"+
+		"de\u0005\n\u0000\u0000e\u0011\u0001\u0000\u0000\u0000fg\u0005G\u0000\u0000"+
+		"gi\u0005\u000b\u0000\u0000hj\u0003\u0014\n\u0000ih\u0001\u0000\u0000\u0000"+
+		"ij\u0001\u0000\u0000\u0000jk\u0001\u0000\u0000\u0000kl\u0005\f\u0000\u0000"+
+		"l\u0013\u0001\u0000\u0000\u0000mr\u0003\n\u0005\u0000no\u0005\u0006\u0000"+
+		"\u0000oq\u0003\n\u0005\u0000pn\u0001\u0000\u0000\u0000qt\u0001\u0000\u0000"+
+		"\u0000rp\u0001\u0000\u0000\u0000rs\u0001\u0000\u0000\u0000s\u0015\u0001"+
+		"\u0000\u0000\u0000tr\u0001\u0000\u0000\u0000uv\u0001\u0000\u0000\u0000"+
+		"v\u0017\u0001\u0000\u0000\u0000\n\u001b!-7FJWair";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

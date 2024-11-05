@@ -27,6 +27,7 @@ assignment
 
 expression
     : tableNestedJoinFunction
+    | tableExpandTableColumnFunction
     | functionCall
     //| unknownExpression
     ;
@@ -42,7 +43,7 @@ tableNestedJoinFunction
 //Table.ExpandTableColumn(table as table, column as text, columnNames as list, optional newColumnNames as nullable list) as table
 tableExpandTableColumnFunction
     : TABLE_EXPAND_TABLE_COLUMN '('
-        table=IDENTIFIER ',' columnsList=literalList (',' NewColumnNamesList=literalList)? 
+        table=IDENTIFIER ',' column=LITERAL ',' columnsList=literalList (',' NewColumnNamesList=literalList)? 
         ')'
     ;
 
