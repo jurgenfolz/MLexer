@@ -1,17 +1,8 @@
 
 from ..PowerQueryParser import PowerQueryParser
-from ..PowerQueryParserVisitor import PowerQueryParserVisitor
+from ._AbstractVisitor import AbstractVisitor
 
-
-
-class AbstractVisitor(PowerQueryParserVisitor):
     
-    def __init__(self):
-        self.tables: list[str] = []
-        self.columns:list[str] = []
-        self.other_identifiers: list[str] = []
-        
-
 
 class TableNestedJoinVisitor(AbstractVisitor):
     def __init__(self):
@@ -19,7 +10,7 @@ class TableNestedJoinVisitor(AbstractVisitor):
 
     def visitTableNestedJoinFunction(self, ctx: PowerQueryParser.TableNestedJoinFunctionContext):
         # Tables
-        table1 = ctx.firstTable.text
+        table1: str = ctx.firstTable.text
         table2 = ctx.secondTable.text
         self.tables.extend([table1, table2])
 
