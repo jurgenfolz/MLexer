@@ -2,10 +2,12 @@ from antlr4 import *
 from src.PyM.PowerQueryLexer import PowerQueryLexer
 from src.PyM.PowerQueryParser import PowerQueryParser
 from src.PyM.visitors.TableNestedJoin import TableNestedJoinVisitor
+import os
 
 def main():
 
-    with open(r'queries\table_neted_join2.txt', 'r', encoding='utf-8') as file:
+    file_path = os.path.join('queries', 'table_nested_join.txt')
+    with open(file_path, 'r', encoding='utf-8') as file:
         query = file.read()
 
     input_stream = InputStream(query)

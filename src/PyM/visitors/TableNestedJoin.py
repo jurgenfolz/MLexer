@@ -2,11 +2,20 @@
 from ..PowerQueryParser import PowerQueryParser
 from ..PowerQueryParserVisitor import PowerQueryParserVisitor
 
-class TableNestedJoinVisitor(PowerQueryParserVisitor):
+
+
+class AbstractVisitor(PowerQueryParserVisitor):
+    
     def __init__(self):
-        self.tables = []
-        self.columns = []
-        self.other_identifiers = []
+        self.tables: list[str] = []
+        self.columns:list[str] = []
+        self.other_identifiers: list[str] = []
+        
+
+
+class TableNestedJoinVisitor(AbstractVisitor):
+    def __init__(self):
+        super().__init__() # Call the parent class constructor
 
     def visitTableNestedJoinFunction(self, ctx: PowerQueryParser.TableNestedJoinFunctionContext):
         # Tables
