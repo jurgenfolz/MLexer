@@ -1,8 +1,6 @@
 from antlr4 import *
 from src.PyM.MExpression import MExpression
-from src.PyM.visitors.MExpressionVisitors import TableNestedJoinVisitor
 from src.PyM.PowerQueryLexer import PowerQueryLexer
-from src.PyM.PowerQueryParser import PowerQueryParser
 import os
 
 def main():
@@ -10,8 +8,8 @@ def main():
     with open(file_path, 'r', encoding='utf-8') as file:
         query = file.read()
 
-    m_expression = MExpression(query)
-    m_expression._visit()
+    expr = MExpression(query)
+    expr.print_parse_tree_as_json('parse_tree.json')
 
     
 if __name__ == '__main__':

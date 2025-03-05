@@ -1,0 +1,1686 @@
+{
+    "type": "rule",
+    "ruleName": "program",
+    "children": [
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "letExpression",
+                    "children": [
+                        {
+                            "type": "terminal",
+                            "tokenText": "let",
+                            "tokenName": "LET"
+                        },
+                        {
+                            "type": "rule",
+                            "ruleName": "assignmentList",
+                            "children": [
+                                {
+                                    "type": "rule",
+                                    "ruleName": "assignment",
+                                    "children": [
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "Source",
+                                            "tokenName": "IDENTIFIER"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "=",
+                                            "tokenName": "EQUALS"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "rule",
+                                                    "ruleName": "functionCall",
+                                                    "children": [
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "Table.FromRows",
+                                                            "tokenName": "IDENTIFIER"
+                                                        },
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "(",
+                                                            "tokenName": "OPEN_PAREN"
+                                                        },
+                                                        {
+                                                            "type": "rule",
+                                                            "ruleName": "argumentList",
+                                                            "children": [
+                                                                {
+                                                                    "type": "rule",
+                                                                    "ruleName": "expression",
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "rule",
+                                                                            "ruleName": "functionCall",
+                                                                            "children": [
+                                                                                {
+                                                                                    "type": "terminal",
+                                                                                    "tokenText": "Json.Document",
+                                                                                    "tokenName": "IDENTIFIER"
+                                                                                },
+                                                                                {
+                                                                                    "type": "terminal",
+                                                                                    "tokenText": "(",
+                                                                                    "tokenName": "OPEN_PAREN"
+                                                                                },
+                                                                                {
+                                                                                    "type": "rule",
+                                                                                    "ruleName": "argumentList",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "type": "rule",
+                                                                                            "ruleName": "expression",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "rule",
+                                                                                                    "ruleName": "functionCall",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "terminal",
+                                                                                                            "tokenText": "Binary.Decompress",
+                                                                                                            "tokenName": "IDENTIFIER"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "type": "terminal",
+                                                                                                            "tokenText": "(",
+                                                                                                            "tokenName": "OPEN_PAREN"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "type": "rule",
+                                                                                                            "ruleName": "argumentList",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "type": "rule",
+                                                                                                                    "ruleName": "expression",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "rule",
+                                                                                                                            "ruleName": "functionCall",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "terminal",
+                                                                                                                                    "tokenText": "Binary.FromText",
+                                                                                                                                    "tokenName": "IDENTIFIER"
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "type": "terminal",
+                                                                                                                                    "tokenText": "(",
+                                                                                                                                    "tokenName": "OPEN_PAREN"
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "type": "terminal",
+                                                                                                                                    "tokenText": "\"bVbJchs3EP0VF8/DBPtytJzYqdhxqkTHqlilAySC5FTGGGWWxObX+JBvyEmn8Mfc6MYwJMcXGwP2+vr1g25vFx8OT139sFtUCyW4sw4OJ1e2ktYZOLlKq8Vddbt4FdMGvgWTTucfyrcylYD/TMU1ml2FPjZwwa10RsIBL5arIawHCqwNy/5w8HDIPm/C2IeUYnZTTLAc8CYUB1NpKSWmMPmASWKXsrFU1qucg77B1iuHsZWyVPZNnYbYDbuxyw5cCcEuO1XeC+zUCmOpoHFPEZ0waH+8AHOmhURzybQv5tuQ2lyikABDtXgX+74uFTHOyNwbUSCqY/M9/EMday0Qj6tjAi6twCaEgkP2eLcb8Tfo15y1a6GCbGkmXJqmTvs2BbSWhl0Uwz3OzldMSIcurw//pnqPLJDOnWMpNGHJNYV/2cX6fuy2cCsdkzn1yRV4EPaFCW/Csxe7MH5aruPyZZvWfXYzHgF6G8eYJj+A1HuDE3bCEyVWD7uw2YB7HxP56YzJxTW4Gm80wgvkKNMIaf3nGLoB/QCETNYujPeHp7SOU28aYdA07/fQcx0zQ6Ry3n2L3Wj3Wz+QFVDSzhZGTTTinsa2qoeBylceF+wmwHz6ElcyhXBJYyj6KShSKj0DCsr2jFbBy7I7P378SCk4DeSMqdZSRTS+1RDr9D+kzMtcwIexDIFMFSHy+1+xW7dp2cR+eRXqlIsW3mNNJ6tprdO0mooRn344PN3HtG67DXmwOU7ecZoY97SjrztYBszghNKXTUil0FyUBHUc6j/ahOZMz8Irpkm3FCuEuA6Pj7Hr/66b5c+0GsIql3FcDd/99+UVDGVikxBF9JzkBMQvbRq6OH7KXoZ5dt6/mqTJ8yIdN3HYT+VpKuW8e8EcscRLXrYqwIw3sVmjj7e5Xdj4bhvGopiaXJw3RdQO/wCTc0fZBXoRl2mAXaQ6xgpRhJCMORrPOlfGKFIG4CqJyQi/ooviYrbqJjec6cto239quy3Ggsx+JrEAHbUA7ZH9i9C14xbjCy3PHxTuuKWtU2xiSBz3IG0lhZCY4gwkoxAlX3HrihoenpqAFQju/eyB09x5qkkViK7ruKME3LLMw/nbRe8NZNOcfJ6HDisAF5G7gO9jSdKXl4IpRdv69nNb4nN3ziTpSGhAhYm1z5umf9iVEcOToI71ZIHrsxBORWlGwqulph25jqksFHO45GevqSbKauePlB2O0HLQ4os2lNEElJzex18fNxPHmddqtoJS0oZrkEKaX9OSEgqmhJ/Zq6II2pUlB3o+O7LTGuj/m5wVKHke/lYpsgXQPHxG+fQ43FNOIQPgwIHPi7u7rw==\"",
+                                                                                                                                    "tokenName": "LITERAL"
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                },
+                                                                                                                {
+                                                                                                                    "type": "terminal",
+                                                                                                                    "tokenText": ",",
+                                                                                                                    "tokenName": "COMMA"
+                                                                                                                },
+                                                                                                                {
+                                                                                                                    "type": "rule",
+                                                                                                                    "ruleName": "expression",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "rule",
+                                                                                                                            "ruleName": "functionCall",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "terminal",
+                                                                                                                                    "tokenText": "BinaryEncoding.Base64",
+                                                                                                                                    "tokenName": "IDENTIFIER"
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "type": "terminal",
+                                                                                                                                    "tokenText": "<missing '('>",
+                                                                                                                                    "tokenName": "OPEN_PAREN"
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "type": "terminal",
+                                                                                                                                    "tokenText": ")",
+                                                                                                                                    "tokenName": "CLOSE_PAREN"
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                },
+                                                                                                                {
+                                                                                                                    "type": "terminal",
+                                                                                                                    "tokenText": ",",
+                                                                                                                    "tokenName": "COMMA"
+                                                                                                                },
+                                                                                                                {
+                                                                                                                    "type": "rule",
+                                                                                                                    "ruleName": "expression",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "type": "rule",
+                                                                                                                            "ruleName": "functionCall",
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "type": "terminal",
+                                                                                                                                    "tokenText": "Compression.Deflate",
+                                                                                                                                    "tokenName": "IDENTIFIER"
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "type": "terminal",
+                                                                                                                                    "tokenText": "<missing '('>",
+                                                                                                                                    "tokenName": "OPEN_PAREN"
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "type": "terminal",
+                                                                                                                                    "tokenText": ")",
+                                                                                                                                    "tokenName": "CLOSE_PAREN"
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "type": "terminal",
+                                                                                                            "tokenText": ")",
+                                                                                                            "tokenName": "CLOSE_PAREN"
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "type": "terminal",
+                                                                                            "tokenText": ",",
+                                                                                            "tokenName": "COMMA"
+                                                                                        },
+                                                                                        {
+                                                                                            "type": "rule",
+                                                                                            "ruleName": "expression",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "type": "terminal",
+                                                                                                    "tokenText": "let",
+                                                                                                    "tokenName": "LET"
+                                                                                                },
+                                                                                                {
+                                                                                                    "type": "rule",
+                                                                                                    "ruleName": "functionCall",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "type": "terminal",
+                                                                                                            "tokenText": "_t",
+                                                                                                            "tokenName": "IDENTIFIER"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "type": "terminal",
+                                                                                                            "tokenText": "=",
+                                                                                                            "tokenName": "EQUALS"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "type": "terminal",
+                                                                                                            "tokenText": "(",
+                                                                                                            "tokenName": "OPEN_PAREN"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "type": "terminal",
+                                                                                                            "tokenText": "(",
+                                                                                                            "tokenName": "OPEN_PAREN"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "type": "terminal",
+                                                                                                            "tokenText": "type",
+                                                                                                            "tokenName": "TYPE"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "type": "terminal",
+                                                                                                            "tokenText": "nullable",
+                                                                                                            "tokenName": "NULLABLE"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "type": "terminal",
+                                                                                                            "tokenText": "text",
+                                                                                                            "tokenName": "TEXT"
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "type": "terminal",
+                                                                                    "tokenText": ")",
+                                                                                    "tokenName": "CLOSE_PAREN"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "meta",
+                                                            "tokenName": "META"
+                                                        },
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "[",
+                                                            "tokenName": "OPEN_BRACKET"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "terminal",
+                            "tokenText": "<missing 'in'>",
+                            "tokenName": "IN"
+                        },
+                        {
+                            "type": "rule",
+                            "ruleName": "expression",
+                            "children": [
+                                {
+                                    "type": "rule",
+                                    "ruleName": "functionCall",
+                                    "children": [
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "Serialized.Text",
+                                            "tokenName": "IDENTIFIER"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "=",
+                                            "tokenName": "EQUALS"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "true",
+                                            "tokenName": "LITERAL"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "]",
+                                            "tokenName": "CLOSE_BRACKET"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ")",
+                                            "tokenName": "CLOSE_PAREN"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "in",
+                                            "tokenName": "IN"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "type",
+                                            "tokenName": "TYPE"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "table",
+                                            "tokenName": "TABLE"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "[",
+                                            "tokenName": "OPEN_BRACKET"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "Stadt",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "=",
+                                    "tokenName": "EQUALS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "_t",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "Bev\u00f6lkerung",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "=",
+                                    "tokenName": "EQUALS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "_t",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "Kanton",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "=",
+                                    "tokenName": "EQUALS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "_t",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "lat",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "=",
+                                    "tokenName": "EQUALS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "_t",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "lng",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "=",
+                                    "tokenName": "EQUALS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "_t",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "]",
+                                    "tokenName": "CLOSE_BRACKET"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ")",
+                                    "tokenName": "CLOSE_PAREN"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "#\"Changed Type\"",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "=",
+                                    "tokenName": "EQUALS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "Table.TransformColumnTypes",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "(",
+                                    "tokenName": "OPEN_PAREN"
+                                },
+                                {
+                                    "type": "rule",
+                                    "ruleName": "argumentList",
+                                    "children": [
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "rule",
+                                                    "ruleName": "functionCall",
+                                                    "children": [
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "Source",
+                                                            "tokenName": "IDENTIFIER"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "{",
+                                                    "tokenName": "OPEN_BRACE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "{",
+                                                    "tokenName": "OPEN_BRACE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "\"Stadt\"",
+                                                    "tokenName": "LITERAL"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "type",
+                                                    "tokenName": "TYPE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "text",
+                                                    "tokenName": "TEXT"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "}",
+                                                    "tokenName": "CLOSE_BRACE"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "{",
+                                                    "tokenName": "OPEN_BRACE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "\"Bev\u00f6lkerung\"",
+                                                    "tokenName": "LITERAL"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "rule",
+                                                    "ruleName": "functionCall",
+                                                    "children": [
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "Int64.Type",
+                                                            "tokenName": "IDENTIFIER"
+                                                        },
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "}",
+                                                            "tokenName": "CLOSE_BRACE"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "{",
+                                                    "tokenName": "OPEN_BRACE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "\"Kanton\"",
+                                                    "tokenName": "LITERAL"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "type",
+                                                    "tokenName": "TYPE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "text",
+                                                    "tokenName": "TEXT"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "}",
+                                                    "tokenName": "CLOSE_BRACE"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "{",
+                                                    "tokenName": "OPEN_BRACE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "\"lat\"",
+                                                    "tokenName": "LITERAL"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "type",
+                                                    "tokenName": "TYPE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "number",
+                                                    "tokenName": "NUMBER"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "}",
+                                                    "tokenName": "CLOSE_BRACE"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "{",
+                                                    "tokenName": "OPEN_BRACE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "\"lng\"",
+                                                    "tokenName": "LITERAL"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "type",
+                                                    "tokenName": "TYPE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "number",
+                                                    "tokenName": "NUMBER"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "}",
+                                                    "tokenName": "CLOSE_BRACE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "}",
+                                                    "tokenName": "CLOSE_BRACE"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ")",
+                                    "tokenName": "CLOSE_PAREN"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "terminal",
+            "tokenText": ",",
+            "tokenName": "COMMA"
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "#\"Merged Queries\"",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "=",
+                                    "tokenName": "EQUALS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "tableNestedJoinFunction",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "Table.NestedJoin",
+                                    "tokenName": "TABLE_NESTED_JOIN"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "(",
+                                    "tokenName": "OPEN_PAREN"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "#\"Changed Type\"",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                },
+                                {
+                                    "type": "rule",
+                                    "ruleName": "literalList",
+                                    "children": [
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "{",
+                                            "tokenName": "OPEN_BRACE"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "\"Kanton\"",
+                                            "tokenName": "LITERAL"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "}",
+                                            "tokenName": "CLOSE_BRACE"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "dimKantone",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                },
+                                {
+                                    "type": "rule",
+                                    "ruleName": "literalList",
+                                    "children": [
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "{",
+                                            "tokenName": "OPEN_BRACE"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "\"Kanton\"",
+                                            "tokenName": "LITERAL"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "}",
+                                            "tokenName": "CLOSE_BRACE"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "\"dimKantone\"",
+                                    "tokenName": "LITERAL"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "JoinKind.LeftOuter",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ")",
+                                    "tokenName": "CLOSE_PAREN"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "terminal",
+            "tokenText": ",",
+            "tokenName": "COMMA"
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "#\"Expanded dimKantone\"",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "=",
+                                    "tokenName": "EQUALS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "tableExpandTableColumnFunction",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "Table.ExpandTableColumn",
+                                    "tokenName": "TABLE_EXPAND_TABLE_COLUMN"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "(",
+                                    "tokenName": "OPEN_PAREN"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "#\"Merged Queries\"",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "\"dimKantone\"",
+                                    "tokenName": "LITERAL"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                },
+                                {
+                                    "type": "rule",
+                                    "ruleName": "literalList",
+                                    "children": [
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "{",
+                                            "tokenName": "OPEN_BRACE"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "\"Kanton\"",
+                                            "tokenName": "LITERAL"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "}",
+                                            "tokenName": "CLOSE_BRACE"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ",",
+                                    "tokenName": "COMMA"
+                                },
+                                {
+                                    "type": "rule",
+                                    "ruleName": "literalList",
+                                    "children": [
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "{",
+                                            "tokenName": "OPEN_BRACE"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "\"Kanton.1\"",
+                                            "tokenName": "LITERAL"
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": "}",
+                                            "tokenName": "CLOSE_BRACE"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ")",
+                                    "tokenName": "CLOSE_PAREN"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "terminal",
+            "tokenText": ",",
+            "tokenName": "COMMA"
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "#\"Added Custom\"",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "=",
+                                    "tokenName": "EQUALS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "Table.AddColumn",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "(",
+                                    "tokenName": "OPEN_PAREN"
+                                },
+                                {
+                                    "type": "rule",
+                                    "ruleName": "argumentList",
+                                    "children": [
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "rule",
+                                                    "ruleName": "functionCall",
+                                                    "children": [
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "#\"Expanded dimKantone\"",
+                                                            "tokenName": "IDENTIFIER"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "\"Custom\"",
+                                                    "tokenName": "LITERAL"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "each",
+                                                    "tokenName": "EACH"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "1",
+                                                    "tokenName": "LITERAL"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ")",
+                                    "tokenName": "CLOSE_PAREN"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "terminal",
+            "tokenText": ",",
+            "tokenName": "COMMA"
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "#\"Changed Type1\"",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "=",
+                                    "tokenName": "EQUALS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "Table.TransformColumnTypes",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "(",
+                                    "tokenName": "OPEN_PAREN"
+                                },
+                                {
+                                    "type": "rule",
+                                    "ruleName": "argumentList",
+                                    "children": [
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "rule",
+                                                    "ruleName": "functionCall",
+                                                    "children": [
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "#\"Added Custom\"",
+                                                            "tokenName": "IDENTIFIER"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "{",
+                                                    "tokenName": "OPEN_BRACE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "{",
+                                                    "tokenName": "OPEN_BRACE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "\"Custom\"",
+                                                    "tokenName": "LITERAL"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "rule",
+                                                    "ruleName": "functionCall",
+                                                    "children": [
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "Int64.Type",
+                                                            "tokenName": "IDENTIFIER"
+                                                        },
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "}",
+                                                            "tokenName": "CLOSE_BRACE"
+                                                        },
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "}",
+                                                            "tokenName": "CLOSE_BRACE"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ")",
+                                    "tokenName": "CLOSE_PAREN"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "terminal",
+            "tokenText": ",",
+            "tokenName": "COMMA"
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "#\"Removed Columns\"",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "=",
+                                    "tokenName": "EQUALS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "Table.RemoveColumns",
+                                    "tokenName": "IDENTIFIER"
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "(",
+                                    "tokenName": "OPEN_PAREN"
+                                },
+                                {
+                                    "type": "rule",
+                                    "ruleName": "argumentList",
+                                    "children": [
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "rule",
+                                                    "ruleName": "functionCall",
+                                                    "children": [
+                                                        {
+                                                            "type": "terminal",
+                                                            "tokenText": "#\"Changed Type1\"",
+                                                            "tokenName": "IDENTIFIER"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "terminal",
+                                            "tokenText": ",",
+                                            "tokenName": "COMMA"
+                                        },
+                                        {
+                                            "type": "rule",
+                                            "ruleName": "expression",
+                                            "children": [
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "{",
+                                                    "tokenName": "OPEN_BRACE"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "\"Kanton\"",
+                                                    "tokenName": "LITERAL"
+                                                },
+                                                {
+                                                    "type": "terminal",
+                                                    "tokenText": "}",
+                                                    "tokenName": "CLOSE_BRACE"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "terminal",
+                                    "tokenText": ")",
+                                    "tokenName": "CLOSE_PAREN"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "terminal",
+            "tokenText": "in",
+            "tokenName": "IN"
+        },
+        {
+            "type": "rule",
+            "ruleName": "statement",
+            "children": [
+                {
+                    "type": "rule",
+                    "ruleName": "expression",
+                    "children": [
+                        {
+                            "type": "rule",
+                            "ruleName": "functionCall",
+                            "children": [
+                                {
+                                    "type": "terminal",
+                                    "tokenText": "#\"Removed Columns\"",
+                                    "tokenName": "IDENTIFIER"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "terminal",
+            "tokenText": "<EOF>",
+            "tokenName": "KEYWORD_OR_IDENTIFIER"
+        }
+    ]
+}

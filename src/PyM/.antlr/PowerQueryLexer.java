@@ -1,4 +1,4 @@
-// Generated from /home/klaus/Repositories/MLexer/src/PyM/PowerQueryLexer.g4 by ANTLR 4.13.1
+// Generated from c:/Users/KlausFolz/Desktop/Repositories/MLexer/src/PyM/PowerQueryLexer.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

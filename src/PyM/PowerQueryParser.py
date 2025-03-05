@@ -1,4 +1,4 @@
-# Generated from src/PyM/PowerQueryParser.g4 by ANTLR 4.10.1
+# Generated from src/PyM/PowerQueryParser.g4 by ANTLR 4.13.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -185,7 +185,7 @@ class PowerQueryParser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.10.1")
+        self.checkVersion("4.13.2")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -220,12 +220,6 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitProgram" ):
                 listener.exitProgram(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitProgram" ):
-                return visitor.visitProgram(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -245,7 +239,7 @@ class PowerQueryParser ( Parser ):
                 self.state = 27 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (((((_la - 29)) & ~0x3f) == 0 and ((1 << (_la - 29)) & ((1 << (PowerQueryParser.LET - 29)) | (1 << (PowerQueryParser.TABLE_NESTED_JOIN - 29)) | (1 << (PowerQueryParser.TABLE_EXPAND_TABLE_COLUMN - 29)) | (1 << (PowerQueryParser.IDENTIFIER - 29)))) != 0)):
+                if not (((((_la - 29)) & ~0x3f) == 0 and ((1 << (_la - 29)) & 4810363371521) != 0)):
                     break
 
             self.state = 29
@@ -285,12 +279,6 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitStatement" ):
                 listener.exitStatement(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStatement" ):
-                return visitor.visitStatement(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -302,12 +290,12 @@ class PowerQueryParser ( Parser ):
             self.state = 33
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [PowerQueryParser.LET]:
+            if token in [29]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 31
                 self.letExpression()
                 pass
-            elif token in [PowerQueryParser.TABLE_NESTED_JOIN, PowerQueryParser.TABLE_EXPAND_TABLE_COLUMN, PowerQueryParser.IDENTIFIER]:
+            elif token in [66, 67, 71]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 32
                 self.expression()
@@ -355,12 +343,6 @@ class PowerQueryParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitLetExpression" ):
                 listener.exitLetExpression(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLetExpression" ):
-                return visitor.visitLetExpression(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -419,12 +401,6 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitAssignmentList" ):
                 listener.exitAssignmentList(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAssignmentList" ):
-                return visitor.visitAssignmentList(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -440,7 +416,7 @@ class PowerQueryParser ( Parser ):
             self.state = 45
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==PowerQueryParser.COMMA:
+            while _la==6:
                 self.state = 41
                 self.match(PowerQueryParser.COMMA)
                 self.state = 42
@@ -485,12 +461,6 @@ class PowerQueryParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitAssignment" ):
                 listener.exitAssignment(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAssignment" ):
-                return visitor.visitAssignment(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -546,12 +516,6 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitExpression" ):
                 listener.exitExpression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression" ):
-                return visitor.visitExpression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -563,17 +527,17 @@ class PowerQueryParser ( Parser ):
             self.state = 55
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [PowerQueryParser.TABLE_NESTED_JOIN]:
+            if token in [66]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 52
                 self.tableNestedJoinFunction()
                 pass
-            elif token in [PowerQueryParser.TABLE_EXPAND_TABLE_COLUMN]:
+            elif token in [67]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 53
                 self.tableExpandTableColumnFunction()
                 pass
-            elif token in [PowerQueryParser.IDENTIFIER]:
+            elif token in [71]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 54
                 self.functionCall()
@@ -646,12 +610,6 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitTableNestedJoinFunction" ):
                 listener.exitTableNestedJoinFunction(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitTableNestedJoinFunction" ):
-                return visitor.visitTableNestedJoinFunction(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -697,7 +655,7 @@ class PowerQueryParser ( Parser ):
             self.state = 74
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==PowerQueryParser.COMMA:
+            if _la==6:
                 self.state = 72
                 self.match(PowerQueryParser.COMMA)
                 self.state = 73
@@ -765,12 +723,6 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitTableExpandTableColumnFunction" ):
                 listener.exitTableExpandTableColumnFunction(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitTableExpandTableColumnFunction" ):
-                return visitor.visitTableExpandTableColumnFunction(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -798,7 +750,7 @@ class PowerQueryParser ( Parser ):
             self.state = 87
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==PowerQueryParser.COMMA:
+            if _la==6:
                 self.state = 85
                 self.match(PowerQueryParser.COMMA)
                 self.state = 86
@@ -852,12 +804,6 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitLiteralList" ):
                 listener.exitLiteralList(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLiteralList" ):
-                return visitor.visitLiteralList(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -875,7 +821,7 @@ class PowerQueryParser ( Parser ):
             self.state = 97
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==PowerQueryParser.COMMA:
+            while _la==6:
                 self.state = 93
                 self.match(PowerQueryParser.COMMA)
                 self.state = 94
@@ -926,12 +872,6 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitFunctionCall" ):
                 listener.exitFunctionCall(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFunctionCall" ):
-                return visitor.visitFunctionCall(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -949,7 +889,7 @@ class PowerQueryParser ( Parser ):
             self.state = 105
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if ((((_la - 66)) & ~0x3f) == 0 and ((1 << (_la - 66)) & ((1 << (PowerQueryParser.TABLE_NESTED_JOIN - 66)) | (1 << (PowerQueryParser.TABLE_EXPAND_TABLE_COLUMN - 66)) | (1 << (PowerQueryParser.IDENTIFIER - 66)))) != 0):
+            if ((((_la - 66)) & ~0x3f) == 0 and ((1 << (_la - 66)) & 35) != 0):
                 self.state = 104
                 self.argumentList()
 
@@ -996,12 +936,6 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitArgumentList" ):
                 listener.exitArgumentList(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitArgumentList" ):
-                return visitor.visitArgumentList(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -1017,7 +951,7 @@ class PowerQueryParser ( Parser ):
             self.state = 114
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==PowerQueryParser.COMMA:
+            while _la==6:
                 self.state = 110
                 self.match(PowerQueryParser.COMMA)
                 self.state = 111
@@ -1053,12 +987,6 @@ class PowerQueryParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitOtherExpression" ):
                 listener.exitOtherExpression(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitOtherExpression" ):
-                return visitor.visitOtherExpression(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
