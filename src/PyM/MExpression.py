@@ -1,6 +1,7 @@
 from antlr4 import InputStream, CommonTokenStream, Token
 from .PowerQueryLexer import PowerQueryLexer 
 from .PowerQueryParser import PowerQueryParser
+from .DataflowVisitor import BuildDataFlowVisitor
 from antlr4.tree.Tree import TerminalNodeImpl
 import json
 
@@ -33,6 +34,21 @@ class MExpression:
             # Print the line number, token text, and token type name
             print(f"Line {line_number}: '{token_text}' => {token_name}")
 
+    def build_dataflow(self):
+        """Parses the M code and builds a dataflow map of steps."""
+        input_stream = InputStream(self.m_code)
+        lexer = PowerQueryLexer(input_stream)
+        token_stream = CommonTokenStream(lexer)
+        parser = PowerQueryParser(token_stream)
+        
+        tree = parser.program()  # or whatever top-level rule you have
+
+        visitor = BuildDataFlowVisitor()
+        visitor.visit(tree)  # This traverses the parse tree
+
+        return visitor.steps_map  # a dict of step_name -> StepNode
+
+    # Region printers
     def print_parse_tree(self):
         """
         Parses the M code using the generated parser and prints
@@ -74,7 +90,6 @@ class MExpression:
         with open(path, 'w') as file:
             json.dump(tree_dict, file, indent=4)
         
-
     def _parse_tree_to_dict(self, node, parser):
         """
         Recursively builds a dictionary from the ANTLR parse tree node.

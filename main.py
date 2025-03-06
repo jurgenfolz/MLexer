@@ -9,7 +9,7 @@ def main():
         query = file.read()
 
     expr = MExpression(query)
-    expr.print_parse_tree_as_json('parse_tree.json')
+    expr.build_dataflow()
 
     
 if __name__ == '__main__':

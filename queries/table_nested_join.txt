@@ -4,7 +4,6 @@ let
     #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"Kanton"}, dimKantone, {"Kanton"}, "dimKantone", JoinKind.LeftOuter),
     #"Expanded dimKantone" = Table.ExpandTableColumn(#"Merged Queries", "dimKantone", {"Kanton"}, {"Kanton.1"}),
     #"Added Custom" = Table.AddColumn(#"Expanded dimKantone", "Custom", each 1),
-    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Custom", Int64.Type}}),
-    #"Removed Columns" = Table.RemoveColumns(#"Changed Type1",{"Kanton"})
+    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Custom", Int64.Type}})
 in
-    #"Removed Columns"
+    #"Changed Type1"

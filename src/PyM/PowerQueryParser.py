@@ -220,6 +220,12 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitProgram" ):
                 listener.exitProgram(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitProgram" ):
+                return visitor.visitProgram(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -278,6 +284,12 @@ class PowerQueryParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitStatement" ):
                 listener.exitStatement(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitStatement" ):
+                return visitor.visitStatement(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -344,6 +356,12 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitLetExpression" ):
                 listener.exitLetExpression(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLetExpression" ):
+                return visitor.visitLetExpression(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -400,6 +418,12 @@ class PowerQueryParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitAssignmentList" ):
                 listener.exitAssignmentList(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAssignmentList" ):
+                return visitor.visitAssignmentList(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -462,6 +486,12 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitAssignment" ):
                 listener.exitAssignment(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAssignment" ):
+                return visitor.visitAssignment(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -515,6 +545,12 @@ class PowerQueryParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitExpression" ):
                 listener.exitExpression(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpression" ):
+                return visitor.visitExpression(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -609,6 +645,12 @@ class PowerQueryParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitTableNestedJoinFunction" ):
                 listener.exitTableNestedJoinFunction(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitTableNestedJoinFunction" ):
+                return visitor.visitTableNestedJoinFunction(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -723,6 +765,12 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitTableExpandTableColumnFunction" ):
                 listener.exitTableExpandTableColumnFunction(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitTableExpandTableColumnFunction" ):
+                return visitor.visitTableExpandTableColumnFunction(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -804,6 +852,12 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitLiteralList" ):
                 listener.exitLiteralList(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLiteralList" ):
+                return visitor.visitLiteralList(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -872,6 +926,12 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitFunctionCall" ):
                 listener.exitFunctionCall(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitFunctionCall" ):
+                return visitor.visitFunctionCall(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -936,6 +996,12 @@ class PowerQueryParser ( Parser ):
             if hasattr( listener, "exitArgumentList" ):
                 listener.exitArgumentList(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitArgumentList" ):
+                return visitor.visitArgumentList(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -987,6 +1053,12 @@ class PowerQueryParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitOtherExpression" ):
                 listener.exitOtherExpression(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitOtherExpression" ):
+                return visitor.visitOtherExpression(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
