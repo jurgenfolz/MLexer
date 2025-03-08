@@ -39,18 +39,38 @@ class PowerQueryParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PowerQueryParser#tableNestedJoinFunction.
-    def visitTableNestedJoinFunction(self, ctx:PowerQueryParser.TableNestedJoinFunctionContext):
+    # Visit a parse tree produced by PowerQueryParser#literal_expression.
+    def visitLiteral_expression(self, ctx:PowerQueryParser.Literal_expressionContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PowerQueryParser#tableExpandTableColumnFunction.
-    def visitTableExpandTableColumnFunction(self, ctx:PowerQueryParser.TableExpandTableColumnFunctionContext):
+    # Visit a parse tree produced by PowerQueryParser#parenthesized_expression.
+    def visitParenthesized_expression(self, ctx:PowerQueryParser.Parenthesized_expressionContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PowerQueryParser#literalList.
-    def visitLiteralList(self, ctx:PowerQueryParser.LiteralListContext):
+    # Visit a parse tree produced by PowerQueryParser#each_expression.
+    def visitEach_expression(self, ctx:PowerQueryParser.Each_expressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PowerQueryParser#meta_expression.
+    def visitMeta_expression(self, ctx:PowerQueryParser.Meta_expressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PowerQueryParser#type_expression.
+    def visitType_expression(self, ctx:PowerQueryParser.Type_expressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PowerQueryParser#type_body.
+    def visitType_body(self, ctx:PowerQueryParser.Type_bodyContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PowerQueryParser#dottedTypeName.
+    def visitDottedTypeName(self, ctx:PowerQueryParser.DottedTypeNameContext):
         return self.visitChildren(ctx)
 
 
@@ -64,8 +84,38 @@ class PowerQueryParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PowerQueryParser#otherExpression.
-    def visitOtherExpression(self, ctx:PowerQueryParser.OtherExpressionContext):
+    # Visit a parse tree produced by PowerQueryParser#tableNestedJoinFunction.
+    def visitTableNestedJoinFunction(self, ctx:PowerQueryParser.TableNestedJoinFunctionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PowerQueryParser#tableExpandTableColumnFunction.
+    def visitTableExpandTableColumnFunction(self, ctx:PowerQueryParser.TableExpandTableColumnFunctionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PowerQueryParser#dottedIdentifier.
+    def visitDottedIdentifier(self, ctx:PowerQueryParser.DottedIdentifierContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PowerQueryParser#literalList.
+    def visitLiteralList(self, ctx:PowerQueryParser.LiteralListContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PowerQueryParser#list_expression.
+    def visitList_expression(self, ctx:PowerQueryParser.List_expressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PowerQueryParser#record_expression.
+    def visitRecord_expression(self, ctx:PowerQueryParser.Record_expressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PowerQueryParser#record_field.
+    def visitRecord_field(self, ctx:PowerQueryParser.Record_fieldContext):
         return self.visitChildren(ctx)
 
 

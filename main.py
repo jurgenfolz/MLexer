@@ -9,6 +9,7 @@ def main():
         query = file.read()
 
     expr = MExpression(query)
+    #expr.print_tokens()
     expr.build_dataflow()
 
     

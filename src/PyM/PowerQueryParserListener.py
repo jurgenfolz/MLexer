@@ -62,30 +62,66 @@ class PowerQueryParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PowerQueryParser#tableNestedJoinFunction.
-    def enterTableNestedJoinFunction(self, ctx:PowerQueryParser.TableNestedJoinFunctionContext):
+    # Enter a parse tree produced by PowerQueryParser#literal_expression.
+    def enterLiteral_expression(self, ctx:PowerQueryParser.Literal_expressionContext):
         pass
 
-    # Exit a parse tree produced by PowerQueryParser#tableNestedJoinFunction.
-    def exitTableNestedJoinFunction(self, ctx:PowerQueryParser.TableNestedJoinFunctionContext):
-        pass
-
-
-    # Enter a parse tree produced by PowerQueryParser#tableExpandTableColumnFunction.
-    def enterTableExpandTableColumnFunction(self, ctx:PowerQueryParser.TableExpandTableColumnFunctionContext):
-        pass
-
-    # Exit a parse tree produced by PowerQueryParser#tableExpandTableColumnFunction.
-    def exitTableExpandTableColumnFunction(self, ctx:PowerQueryParser.TableExpandTableColumnFunctionContext):
+    # Exit a parse tree produced by PowerQueryParser#literal_expression.
+    def exitLiteral_expression(self, ctx:PowerQueryParser.Literal_expressionContext):
         pass
 
 
-    # Enter a parse tree produced by PowerQueryParser#literalList.
-    def enterLiteralList(self, ctx:PowerQueryParser.LiteralListContext):
+    # Enter a parse tree produced by PowerQueryParser#parenthesized_expression.
+    def enterParenthesized_expression(self, ctx:PowerQueryParser.Parenthesized_expressionContext):
         pass
 
-    # Exit a parse tree produced by PowerQueryParser#literalList.
-    def exitLiteralList(self, ctx:PowerQueryParser.LiteralListContext):
+    # Exit a parse tree produced by PowerQueryParser#parenthesized_expression.
+    def exitParenthesized_expression(self, ctx:PowerQueryParser.Parenthesized_expressionContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#each_expression.
+    def enterEach_expression(self, ctx:PowerQueryParser.Each_expressionContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#each_expression.
+    def exitEach_expression(self, ctx:PowerQueryParser.Each_expressionContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#meta_expression.
+    def enterMeta_expression(self, ctx:PowerQueryParser.Meta_expressionContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#meta_expression.
+    def exitMeta_expression(self, ctx:PowerQueryParser.Meta_expressionContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#type_expression.
+    def enterType_expression(self, ctx:PowerQueryParser.Type_expressionContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#type_expression.
+    def exitType_expression(self, ctx:PowerQueryParser.Type_expressionContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#type_body.
+    def enterType_body(self, ctx:PowerQueryParser.Type_bodyContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#type_body.
+    def exitType_body(self, ctx:PowerQueryParser.Type_bodyContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#dottedTypeName.
+    def enterDottedTypeName(self, ctx:PowerQueryParser.DottedTypeNameContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#dottedTypeName.
+    def exitDottedTypeName(self, ctx:PowerQueryParser.DottedTypeNameContext):
         pass
 
 
@@ -107,12 +143,66 @@ class PowerQueryParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PowerQueryParser#otherExpression.
-    def enterOtherExpression(self, ctx:PowerQueryParser.OtherExpressionContext):
+    # Enter a parse tree produced by PowerQueryParser#tableNestedJoinFunction.
+    def enterTableNestedJoinFunction(self, ctx:PowerQueryParser.TableNestedJoinFunctionContext):
         pass
 
-    # Exit a parse tree produced by PowerQueryParser#otherExpression.
-    def exitOtherExpression(self, ctx:PowerQueryParser.OtherExpressionContext):
+    # Exit a parse tree produced by PowerQueryParser#tableNestedJoinFunction.
+    def exitTableNestedJoinFunction(self, ctx:PowerQueryParser.TableNestedJoinFunctionContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#tableExpandTableColumnFunction.
+    def enterTableExpandTableColumnFunction(self, ctx:PowerQueryParser.TableExpandTableColumnFunctionContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#tableExpandTableColumnFunction.
+    def exitTableExpandTableColumnFunction(self, ctx:PowerQueryParser.TableExpandTableColumnFunctionContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#dottedIdentifier.
+    def enterDottedIdentifier(self, ctx:PowerQueryParser.DottedIdentifierContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#dottedIdentifier.
+    def exitDottedIdentifier(self, ctx:PowerQueryParser.DottedIdentifierContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#literalList.
+    def enterLiteralList(self, ctx:PowerQueryParser.LiteralListContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#literalList.
+    def exitLiteralList(self, ctx:PowerQueryParser.LiteralListContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#list_expression.
+    def enterList_expression(self, ctx:PowerQueryParser.List_expressionContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#list_expression.
+    def exitList_expression(self, ctx:PowerQueryParser.List_expressionContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#record_expression.
+    def enterRecord_expression(self, ctx:PowerQueryParser.Record_expressionContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#record_expression.
+    def exitRecord_expression(self, ctx:PowerQueryParser.Record_expressionContext):
+        pass
+
+
+    # Enter a parse tree produced by PowerQueryParser#record_field.
+    def enterRecord_field(self, ctx:PowerQueryParser.Record_fieldContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#record_field.
+    def exitRecord_field(self, ctx:PowerQueryParser.Record_fieldContext):
         pass
 
 

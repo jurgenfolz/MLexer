@@ -1,8 +1,8 @@
 from antlr4 import InputStream, CommonTokenStream, Token
 from .PowerQueryLexer import PowerQueryLexer 
 from .PowerQueryParser import PowerQueryParser
-from .DataflowVisitor import BuildDataFlowVisitor
 from antlr4.tree.Tree import TerminalNodeImpl
+from .MVisitor import MVisitor, TreePrinterVisitor
 import json
 
 class MExpression:
@@ -35,20 +35,29 @@ class MExpression:
             print(f"Line {line_number}: '{token_text}' => {token_name}")
 
     def build_dataflow(self):
-        """Parses the M code and builds a dataflow map of steps."""
         input_stream = InputStream(self.m_code)
         lexer = PowerQueryLexer(input_stream)
         token_stream = CommonTokenStream(lexer)
         parser = PowerQueryParser(token_stream)
         
-        tree = parser.program()  # or whatever top-level rule you have
+        tree = parser.program()
+        visitor = MVisitor()
+        steps_map = visitor.visit(tree)
 
-        visitor = BuildDataFlowVisitor()
-        visitor.visit(tree)  # This traverses the parse tree
+        print('Steps Map:', steps_map)
+        return steps_map
 
-        return visitor.steps_map  # a dict of step_name -> StepNode
-
-    # Region printers
+    def print_tree(self):
+        input_stream = InputStream(self.m_code)
+        lexer = PowerQueryLexer(input_stream)
+        token_stream = CommonTokenStream(lexer)
+        parser = PowerQueryParser(token_stream)
+        
+        tree = parser.program()
+        visitor = TreePrinterVisitor()
+        visitor.visit(tree)
+    
+    #region printers
     def print_parse_tree(self):
         """
         Parses the M code using the generated parser and prints
@@ -122,3 +131,4 @@ class MExpression:
             "ruleName": rule_name,
             "children": children
         }
+    #endregion

@@ -1,0 +1,6 @@
+let
+    Source = 123,
+    another = 1
+in
+    another
+
