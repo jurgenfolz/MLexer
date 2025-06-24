@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "PyM"
-version = "0.0.0"
+version = "0.0.1"
 authors = [
   { name="Klaus Jürgen Folz", email="klausjurgenfolz@gmail.com"},
 ]
-description = "PyDAX is designed to analyze DAX, it can extract comments, remove comments, and identify columns and measures referenced in DAX expressions."
+description = "PyM is a Python lexer that tokenizes and analyses the Power Query M language, adapted from the ANTLR grammars-v4 repository grammar (https://github.com/antlr/grammars-v4/blob/master/powerquery/PowerQueryLexer.g4)"
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [

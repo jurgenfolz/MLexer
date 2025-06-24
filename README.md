@@ -1,0 +1,1 @@
+How to create: java -Xmx500M -cp antlr-4.13.2-complete.jar org.antlr.v4.Tool -Dlanguage=Python3 src\PyM\PowerQueryLexer.g4
