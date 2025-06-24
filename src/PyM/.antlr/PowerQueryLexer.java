@@ -27,8 +27,10 @@ public class PowerQueryLexer extends Lexer {
 		DOTDOT=51, BANG=52, NOT=53, PLUS=54, MINUS=55, META=56, IS=57, NEQ=58, 
 		GE=59, LE=60, SLASH=61, STAR=62, AMP=63, LEQ=64, GEQ=65, LITERAL=66, TEXT_LITERAL=67, 
 		IDENTIFIER=68, REGULAR_IDENTIFIER=69, AVAILABLE_IDENTIFIER=70, KEYWORD_OR_IDENTIFIER=71;
+	public static final int
+		COMMENTCHANNEL=2;
 	public static String[] channelNames = {
-		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
+		"DEFAULT_TOKEN_CHANNEL", "HIDDEN", "COMMENTCHANNEL"
 	};
 
 	public static String[] modeNames = {
@@ -666,7 +668,7 @@ public class PowerQueryLexer extends Lexer {
 		"\u0000\u0000\u0108\n\u0001\u0000\u0000\u0000\u0109\u010c\u0003\r\u0006"+
 		"\u0000\u010a\u010c\u0003\u0013\t\u0000\u010b\u0109\u0001\u0000\u0000\u0000"+
 		"\u010b\u010a\u0001\u0000\u0000\u0000\u010c\u010d\u0001\u0000\u0000\u0000"+
-		"\u010d\u010e\u0006\u0005\u0000\u0000\u010e\f\u0001\u0000\u0000\u0000\u010f"+
+		"\u010d\u010e\u0006\u0005\u0001\u0000\u010e\f\u0001\u0000\u0000\u0000\u010f"+
 		"\u0110\u0005/\u0000\u0000\u0110\u0111\u0005/\u0000\u0000\u0111\u0113\u0001"+
 		"\u0000\u0000\u0000\u0112\u0114\u0003\u000f\u0007\u0000\u0113\u0112\u0001"+
 		"\u0000\u0000\u0000\u0113\u0114\u0001\u0000\u0000\u0000\u0114\u000e\u0001"+
@@ -1032,7 +1034,8 @@ public class PowerQueryLexer extends Lexer {
 		"+\u0000\u00f5\u00fb\u0101\u010b\u0113\u0117\u011f\u0126\u012a\u012d\u0131"+
 		"\u019a\u01a0\u01ad\u01b3\u02e6\u02ea\u02f1\u02fc\u0300\u030b\u0313\u0318"+
 		"\u031c\u031e\u0326\u032e\u0334\u0342\u0348\u034f\u0355\u035c\u0360\u0368"+
-		"\u036e\u0373\u0379\u0380\u0390\u03ac\u03b1\u0001\u0006\u0000\u0000";
+		"\u036e\u0373\u0379\u0380\u0390\u03ac\u03b1\u0002\u0006\u0000\u0000\u0000"+
+		"\u0002\u0000";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

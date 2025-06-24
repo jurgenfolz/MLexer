@@ -34,3 +34,4 @@ class MExpression:
         while token.type != Token.EOF:
             print(f"Token: {token.text}, Type: {self.lexer.symbolicNames[token.type]}, Number: {token.type}")
             token = self.lexer.nextToken()
+            

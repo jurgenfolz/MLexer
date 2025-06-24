@@ -1,6 +1,5 @@
-// $antlr-format alignTrailingComments true, columnLimit 150, maxEmptyLinesToKeep 1, reflowComments false, useTab false
-// $antlr-format allowShortRulesOnASingleLine true, allowShortBlocksOnASingleLine true, minEmptyLines 0, alignSemicolons ownLine
-// $antlr-format alignColons trailing, singleLineOverrulesHangingColon true, alignLexerCommands true, alignLabels true, alignTrailers true
+// $antlr-format alignTrailingComments true, columnLimit 150, maxEmptyLinesToKeep 1, reflowComments false, useTab false 
+// $antlr-format allowShortRulesOnASingleLine true, allowShortBlocksOnASingleLine true, minEmptyLines 0, alignColons trailing, singleLineOverrulesHangingColon true, alignLexerCommands true, alignLabels true, alignTrailers true
 
 lexer grammar PowerQueryLexer;
 
@@ -8,13 +7,19 @@ options {
     caseInsensitive = true;
 }
 
+// Extra channel PowerQueryLexer.COMMENT.
+channels { COMMENTCHANNEL }
+
 fragment LEXICAL_UNIT     : LEXICAL_ELEMENTS;
 fragment LEXICAL_ELEMENTS : LEXICAL_ELEMENT LEXICAL_ELEMENTS?;
 fragment LEXICAL_ELEMENT  : WHITESPACE | TOKEN COMMENT;
 
-WHITESPACE                         : ( [\p{White_Space}] | [\u0009\u000B\u000C] | [\u000D][\u000A] NEW_LINE_CHAR) -> skip;
-NEW_LINE_CHAR                      : [\u000D\u000A\u0085\u2028\u2029]                                             -> skip;
-COMMENT                            : (SINGLE_LINE_COMMENT | DELIMITED_COMMENT)                                    -> skip;
+// Should completely disappear from the token stream
+WHITESPACE    : ( [\p{White_Space}] | [\u0009\u000B\u000C] | [\u000D][\u000A] NEW_LINE_CHAR) -> skip;
+NEW_LINE_CHAR : [\u000D\u000A\u0085\u2028\u2029]                                             -> skip;
+
+// Commentsthe parser ignores them.
+COMMENT : (SINGLE_LINE_COMMENT | DELIMITED_COMMENT) -> channel(COMMENTCHANNEL);
 fragment SINGLE_LINE_COMMENT       : '//' SINGLE_LINE_COMMENT_CHARS?;
 fragment SINGLE_LINE_COMMENT_CHARS : SINGLE_LINE_COMMENT_CHAR SINGLE_LINE_COMMENT_CHARS?;
 fragment SINGLE_LINE_COMMENT_CHAR  : ~'\n';
@@ -23,6 +28,7 @@ fragment DELIMITED_COMMENT_TEXT    : DELIMITED_COMMENT_SECTION DELIMITED_COMMENT
 fragment DELIMITED_COMMENT_SECTION : ( '/' | ASTERISKS? NOT_SLASH_OR_ASTERISKS);
 fragment ASTERISKS                 : '*' ASTERISKS?;
 fragment NOT_SLASH_OR_ASTERISKS    : [^*/];
+
 fragment KEYWORD:
     AND
     | AS
