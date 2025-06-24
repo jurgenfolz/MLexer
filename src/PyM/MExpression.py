@@ -27,11 +27,25 @@ class MExpression:
         
         return ''.join(result)
     
-    def print_tokens(self):
+    def print_tokens(self) -> None:
         """Prints the tokens of the M expression"""
         self.lexer.reset()
         token: Token = self.lexer.nextToken()
         while token.type != Token.EOF:
             print(f"Token: {token.text}, Type: {self.lexer.symbolicNames[token.type]}, Number: {token.type}")
             token = self.lexer.nextToken()
-            
+    
+    def write_tokens_to_txt(self, file_path: str) -> None:
+        """Writes the tokens of the M expression to a text file
+
+        Args:
+            file_path (str): Path to the output text file
+        """
+        with open(file_path, 'w', encoding='utf-8') as file:
+            self.lexer.reset()
+            token: Token = self.lexer.nextToken()
+            while token.type != Token.EOF:
+                file.write(f"Token: {token.text}, Type: {self.lexer.symbolicNames[token.type]}, Number: {token.type}\n")
+                token = self.lexer.nextToken()
+                
+    

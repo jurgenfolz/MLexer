@@ -1,0 +1,177 @@
+section Section1;
+
+shared dCities = let
+
+  Source = Excel.Workbook(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/major_cities.xlsx"), null, true),
+
+  #"Navigation 1" = Source{[Item = "cities", Kind = "Sheet"]}[Data],
+
+  #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
+
+  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"name", type text}, {"asciiname", type text}, {"lat", type number}, {"lon", type number}, {"class", type text}, {"country_code", type text}, {"pop", Int64.Type}, {"elevation", Int64.Type}, {"timezone", type text}, {"ID", Int64.Type}})
+
+in
+
+  #"Changed column type";
+
+shared dCountries = let
+
+  Source = Excel.Workbook(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/countries.xlsx"), null, true),
+
+  #"Navigation 1" = Source{[Item = "countries", Kind = "Sheet"]}[Data],
+
+  #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
+
+  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"ISO", type text}, {"ISO3", type text}, {"ISO-Numeric", Int64.Type}, {"fips", type text}, {"Country", type text}, {"Capital", type text}, {"Area(in sq km)", Int64.Type}, {"Population", Int64.Type}, {"ContinentAbreviation", type text}, {"tld", type text}, {"CurrencyCode", type text}, {"CurrencyName", type text}, {"Phone", type text}, {"Postal Code Format", type text}, {"Postal Code Regex", type text}, {"Languages", type text}, {"geonameid", Int64.Type}, {"neighbours", type text}, {"EquivalentFipsCode", type text}, {"Continent", type text}})
+
+in
+
+  #"Changed column type";
+
+shared factBirthsDeaths = let
+  Source = Csv.Document(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/births-and-deaths-projected-to-2100.csv"), [Delimiter = ",", Columns = 7, QuoteStyle = QuoteStyle.None]),
+  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Extracted Text Before Delimiter" = Table.TransformColumns(#"Promoted Headers", {{"Deaths - Sex: all - Age: all - Variant: estimates", each Text.BeforeDelimiter(_, "."), type text}, {"Births - Sex: all - Age: all - Variant: estimates", each Text.BeforeDelimiter(_, "."), type text}}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Extracted Text Before Delimiter",{{"Entity", type text}, {"Code", type text}, {"Year", Int64.Type}, {"Deaths - Sex: all - Age: all - Variant: estimates", type number}, {"Deaths - Sex: all - Age: all - Variant: medium", type number}, {"Births - Sex: all - Age: all - Variant: estimates", type number}, {"Births - Sex: all - Age: all - Variant: medium", type number}}),
+    #"Filtered only past" = Table.SelectRows(#"Changed Type", each ([#"Deaths - Sex: all - Age: all - Variant: estimates"] <> null and [#"Deaths - Sex: all - Age: all - Variant: estimates"] <> "")),
+    #"Renamed Columns" = Table.RenameColumns(#"Filtered only past",{{"Deaths - Sex: all - Age: all - Variant: estimates", "Deaths"}, {"Births - Sex: all - Age: all - Variant: estimates", "Births"}}),
+    #"Filtered blanks on ISO" = Table.SelectRows(#"Renamed Columns", each ([Code] <> "")),
+    #"Removed Other Columns" = Table.SelectColumns(#"Filtered blanks on ISO",{"Entity", "Code", "Year", "Deaths", "Births"}),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Removed Other Columns", {"Entity", "Code", "Year"}, "Attribute", "Value")
+in
+    #"Unpivoted Columns";
+
+shared factCarbonIntensityElectricity = let
+  Source = Csv.Document(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/carbon-intensity-electricity.csv"), [Delimiter = ",", Columns = 4, QuoteStyle = QuoteStyle.None]),
+  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Entity", "Code", "Year", "Carbon intensity of electricity (gCO2/kWh)"}),
+    #"Filtered blanks on ISO" = Table.SelectRows(#"Removed Other Columns", each ([Code] <> "")),
+    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Filtered blanks on ISO", {{"Carbon intensity of electricity (gCO2/kWh)", type number}}, "en-US"),
+    #"Changed Type" = Table.TransformColumnTypes(#"Changed Type with Locale",{{"Year", Int64.Type}}),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Changed Type", {"Entity", "Code", "Year"}, "Attribute", "Value")
+in
+    #"Unpivoted Columns";
+
+shared factFreedomOfExpressionIndex = let
+  Source = Csv.Document(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/freedom-of-expression-index.csv"), [Delimiter = ",", Columns = 6, QuoteStyle = QuoteStyle.None]),
+  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Entity", "Code", "Year", "freeexpr_vdem_owid", "freeexpr_vdem_high_owid", "freeexpr_vdem_low_owid"}),
+    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Removed Other Columns", {{"freeexpr_vdem_owid", type number}, {"freeexpr_vdem_high_owid", type number}, {"freeexpr_vdem_low_owid", type number}}, "en-US"),
+    #"Changed Type" = Table.TransformColumnTypes(#"Changed Type with Locale",{{"Year", Int64.Type}}),
+    #"Filtered blanks on ISO" = Table.SelectRows(#"Changed Type", each [Code] <> null and [Code] <> ""),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Filtered blanks on ISO", {"Entity", "Code", "Year"}, "Attribute", "Value")
+in
+    #"Unpivoted Columns";
+
+shared factGDP = let
+  Source = Csv.Document(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/gdp.csv"), [Delimiter = ",", Columns = 4, QuoteStyle = QuoteStyle.None]),
+  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Entity", "Code", "Year", "GDP (constant 2015 US$)"}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Removed Other Columns",{{"GDP (constant 2015 US$)", type number}, {"Year", Int64.Type}}),
+    #"Filtered blanks on ISO" = Table.SelectRows(#"Changed Type", each [Code] <> null and [Code] <> ""),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Filtered blanks on ISO", {"Entity", "Code", "Year"}, "Attribute", "Value")
+in
+    #"Unpivoted Columns";
+
+shared factGDPperCapita = let
+  Source = Csv.Document(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/gdp-per-capita 1.csv"), [Delimiter = ",", Columns = 5, QuoteStyle = QuoteStyle.None]),
+  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Entity", "Code", "Year", "GDP per capita"}),
+    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Removed Other Columns", {{"GDP per capita", type number}}, "en-US"),
+    #"Filtered blanks on ISO" = Table.SelectRows(#"Changed Type with Locale", each [Code] <> null and [Code] <> ""),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Filtered blanks on ISO", {"Entity", "Code", "Year"}, "Attribute", "Value"),
+    #"Changed Type" = Table.TransformColumnTypes(#"Unpivoted Columns",{{"Year", Int64.Type}})
+in
+    #"Changed Type";
+
+shared factHDI = let
+  Source = Csv.Document(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/human-development-index.csv"), [Delimiter = ",", Columns = 4, QuoteStyle = QuoteStyle.None]),
+  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Entity", "Code", "Year", "Human Development Index"}),
+    #"Filtered blanks on ISO" = Table.SelectRows(#"Removed Other Columns", each [Code] <> null and [Code] <> ""),
+    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Filtered blanks on ISO", {{"Human Development Index", type number}}, "en-US"),
+    #"Changed Type" = Table.TransformColumnTypes(#"Changed Type with Locale",{{"Year", Int64.Type}}),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Changed Type", {"Entity", "Code", "Year"}, "Attribute", "Value")
+in
+    #"Unpivoted Columns";
+
+shared factMerchandiseExportsGdp = let
+  Source = Csv.Document(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/merchandise-exports-gdp-cepii.csv"), [Delimiter = ",", Columns = 4, QuoteStyle = QuoteStyle.None]),
+  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Entity", "Code", "Year", "Value of global merchandise exports as a share of GDP (Fouquin and Hugot; CEPII 2016; National data)"}),
+    #"Filtered blanks on ISO" = Table.SelectRows(#"Removed Other Columns", each [Code] <> null and [Code] <> ""),
+    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Filtered blanks on ISO", {{"Value of global merchandise exports as a share of GDP (Fouquin and Hugot; CEPII 2016; National data)", type number}}, "en-US"),
+    #"Added % col" = Table.AddColumn(#"Changed Type with Locale", "Value of global merchandise exports as a share of GDP", each [#"Value of global merchandise exports as a share of GDP (Fouquin and Hugot; CEPII 2016; National data)"]/100, type number),
+    #"Removed Columns" = Table.RemoveColumns(#"Added % col",{"Value of global merchandise exports as a share of GDP (Fouquin and Hugot; CEPII 2016; National data)"}),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Removed Columns", {"Entity", "Code", "Year"}, "Attribute", "Value"),
+    #"Changed Type" = Table.TransformColumnTypes(#"Unpivoted Columns",{{"Year", Int64.Type}})
+in
+    #"Changed Type";
+
+shared factPopulation = let
+  Source = Csv.Document(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/population.csv"), [Delimiter = ",", Columns = 4, QuoteStyle = QuoteStyle.None]),
+   #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Entity", "Code", "Year", "Population (historical estimates)"}),
+    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"Population (historical estimates)", "Population"}}),
+    #"Filtered blanks on ISO" = Table.SelectRows(#"Renamed Columns", each [Code] <> null and [Code] <> ""),
+    #"Changed Type" = Table.TransformColumnTypes(#"Filtered blanks on ISO",{{"Population", Int64.Type}, {"Year", Int64.Type}}),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Changed Type", {"Entity", "Code", "Year"}, "Attribute", "Value")
+in
+    #"Unpivoted Columns";
+
+shared factLifeExpectancy = let
+  Source = Csv.Document(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/life-expectancy.csv"), [Delimiter = ",", Columns = 4, QuoteStyle = QuoteStyle.None]),
+  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Entity", "Code", "Year", "Life expectancy at birth (historical)"}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Removed Other Columns",{{"Year", Int64.Type}}),
+    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Changed Type", {{"Life expectancy at birth (historical)", type number}}, "en-US"),
+    #"Renamed Columns" = Table.RenameColumns(#"Changed Type with Locale",{{"Life expectancy at birth (historical)", "Life expectancy at birth"}}),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Renamed Columns", {"Entity", "Code", "Year"}, "Attribute", "Value"),
+    #"Filtered Rows" = Table.SelectRows(#"Unpivoted Columns", each [Code] <> null and [Code] <> "")
+in
+    #"Filtered Rows";
+
+shared factExpectedYearsSchooling = let
+  Source = Csv.Document(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/expected-years-of-schooling.csv"), [Delimiter = ",", Columns = 4, QuoteStyle = QuoteStyle.None]),
+  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Entity", "Code", "Year", "Expected Years of Schooling"}),
+    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Removed Other Columns", {{"Expected Years of Schooling", type number}}, "en-US"),
+    #"Changed Type" = Table.TransformColumnTypes(#"Changed Type with Locale",{{"Year", Int64.Type}}),
+    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [Code] <> null and [Code] <> ""),
+    #"Renamed Columns" = Table.RenameColumns(#"Filtered Rows",{{"Expected Years of Schooling", "Expected years of schooling"}}),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Renamed Columns", {"Entity", "Code", "Year"}, "Attribute", "Value")
+in
+    #"Unpivoted Columns";
+
+shared factGNI = let
+  Source = Csv.Document(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/world-banks-income-groups.csv"), [Delimiter = ",", Columns = 4, QuoteStyle = QuoteStyle.None]),
+  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Entity", "Code", "Year", "Income classifications (World Bank (2021))"}),
+    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"Income classifications (World Bank (2021))", "Gross national income"}}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Year", Int64.Type}}),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Changed Type", {"Entity", "Code", "Year"}, "Attribute", "Class"),
+    #"Filtered Rows" = Table.SelectRows(#"Unpivoted Columns", each [Code] <> null and [Code] <> "")
+in
+    #"Filtered Rows";
+
+shared factData = let
+    Source = Table.Combine({factBirthsDeaths, factCarbonIntensityElectricity, factFreedomOfExpressionIndex, factGDP, factGDPperCapita, factHDI, factMerchandiseExportsGdp, factPopulation, factLifeExpectancy, factExpectedYearsSchooling, factGNI})
+in
+    Source;
+
+shared dMetrics = let
+
+  Source = Excel.Workbook(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/metrics_metadata.xlsx"), null, true),
+
+  #"Navigation 1" = Source{[Item = "Tabelle1", Kind = "Sheet"]}[Data],
+
+  #"Changed column type" = Table.TransformColumnTypes(#"Navigation 1", {{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}}),
+
+  #"Promoted headers" = Table.PromoteHeaders(#"Changed column type", [PromoteAllScalars = true]),
+
+  #"Changed column type 1" = Table.TransformColumnTypes(#"Promoted headers", {{"Attribute", type text}, {"Alias", type text}, {"Description", type text}, {"Source", type text}, {"Link", type text}, {"Parameter name", type text}})
+
+in
+
+  #"Changed column type 1";
+
