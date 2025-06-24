@@ -1,5 +1,5 @@
 from antlr4 import InputStream, Token
-from src.PyM.PowerQueryLexer import PowerQueryLexer
+from .PowerQueryLexer import PowerQueryLexer
 
 class MExpression:
     def __init__(self, m_expression: str):
