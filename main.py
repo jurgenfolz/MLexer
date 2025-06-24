@@ -1,16 +1,14 @@
-from antlr4 import *
 from src.PyM.MExpression import MExpression
-from src.PyM.PowerQueryLexer import PowerQueryLexer
 import os
 
 def main():
-    file_path = os.path.join('queries', 'table_nested_join.txt')
+    file_path = os.path.join('queries', 'complex_query.txt')
+    
     with open(file_path, 'r', encoding='utf-8') as file:
         query = file.read()
 
     expr = MExpression(query)
-    #expr.print_tokens()
-    expr.build_dataflow()
+    expr.print_tokens()
 
     
 if __name__ == '__main__':

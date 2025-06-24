@@ -135,10 +135,11 @@ STAR                                   : '*';
 AMP                                    : '&';
 LEQ                                    : '<=';
 GEQ                                    : '>=';
-TABLE_NESTED_JOIN                      : 'Table.NestedJoin';
-TABLE_EXPAND_TABLE_COLUMN              : 'Table.ExpandTableColumn';
-DOT                                    : '.';
-
+fragment TEXT_LITERAL_CHAR:
+    SINGLE_TEXT_CHAR
+    | CHARACHTER_ESCAPE_SEQUENCE
+    | DOUBLE_QUOTE_ESACAPE_SEQUENCE
+;
 fragment NUMBER_LITERAL     : DECIMAL_NUMBER_LITERAL | HEX_NUMBER_LITERAL;
 LITERAL                     : LOGICAL_LITERAL | NUMBER_LITERAL | TEXT_LITERAL | NULL_LITERAL | VERBATIM_LITERAL;
 fragment LOGICAL_LITERAL    : 'true' | 'false';
@@ -155,32 +156,11 @@ fragment DECIMAL_NUMBER_LITERAL:
 fragment EXPONENT_PART : '[Ee]' SIGN? DECIMAL_DIGITS;
 fragment SIGN          : [+-];
 
-
+TEXT_LITERAL                           : '"' TEXT_LITERAL_CHARS? '"';
+fragment TEXT_LITERAL_CHARS            : TEXT_LITERAL_CHAR TEXT_LITERAL_CHARS?;
 fragment DOUBLE_QUOTE_ESACAPE_SEQUENCE : '""';
 fragment NULL_LITERAL                  : 'null';
 fragment VERBATIM_LITERAL              : '#!' TEXT_LITERAL_CHARS? '"';
-
-TEXT_LITERAL
-    : '"' TEXT_LITERAL_CHARS? '"';
-
-fragment TEXT_LITERAL_CHARS
-    : TEXT_LITERAL_CHAR+;
-
-fragment TEXT_LITERAL_CHAR
-    : SINGLE_TEXT_CHAR
-    | CHARACHTER_ESCAPE_SEQUENCE
-    | DOUBLE_QUOTE_ESCAPE_SEQUENCE;
-
-fragment SINGLE_TEXT_CHAR
-    : ~'"' | '#' ~'(';
-
-fragment DOUBLE_QUOTE_ESCAPE_SEQUENCE
-    : '""';
-
-
-COLUMN_REFERENCE
-    : OPEN_BRACKET (IDENTIFIER | QUOTED_IDENTIFIER) CLOSE_BRACKET
-    ;
 
 IDENTIFIER                     : REGULAR_IDENTIFIER | QUOTED_IDENTIFIER;
 REGULAR_IDENTIFIER             : AVAILABLE_IDENTIFIER | AVAILABLE_IDENTIFIER '.' REGULAR_IDENTIFIER;
@@ -241,3 +221,5 @@ fragment OPERATOR_OR_PUNCTUATOR:
     | DOTDOT
     | ELLIPSES
 ;
+
+fragment SINGLE_TEXT_CHAR: ~'"' | '#' ~'(';

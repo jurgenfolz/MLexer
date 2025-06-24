@@ -1,0 +1,40 @@
+let
+//AQZUG (Aufenthaltsqualität Zug)
+  Source = Snowflake.Databases(
+    Server, 
+    Warehouse, 
+    [Role = Role]
+  ), 
+  DEVX_STD_DASHPROD_DB_Database = Source{[Name = Database, Kind = "Database"]}[Data], 
+  DATAMARTS_Schema = DEVX_STD_DASHPROD_DB_Database{[Name = "DATAMARTS", Kind = "Schema"]}[Data], 
+  QMS_AQZUG_Table = DATAMARTS_Schema{[Name = "QMS_AQZUG", Kind = "Table"]}[Data],
+  //Filtered only values that are relevant to Fernverkehr (FV)
+  #"Filtered Only FV" = Table.SelectRows(
+    QMS_AQZUG_Table, 
+    each ([SD_FV_RV] = "FV" or [SD_FV_RV] = "FV unbegl" or [SD_FV_RV] = "FV unbegleitet")
+  ), 
+  #"Removed Unused Columns" = Table.SelectColumns(
+    #"Filtered Only FV", 
+    {"SD_DATUM", "SD_ZIEL_BHF", "SD_AB_BHF", "INDEX_AQ_ZUG"}
+  ),
+  //For AQZUG the numerator is just the value of AQZUG, no denominator need. 
+  #"Renamed Columns" = Table.RenameColumns(
+    #"Removed Unused Columns", 
+    {
+      {"SD_DATUM", "DATUM"}, 
+      {"SD_AB_BHF", "BP_VON"}, 
+      {"SD_ZIEL_BHF", "BP"}, 
+      {"INDEX_AQ_ZUG", "Numerator"}
+    }
+  ), 
+  #"Added KPI Name" = Table.AddColumn(#"Renamed Columns", "KPI", each "AQZUG", type text),
+  //AQZUG uses the VON-BIS column for a relationship with the 'Lines' table, that will be later be used to calculate the values shown in the Fernverkehr page 
+  #"Added VON_BIS" = Table.AddColumn(
+    #"Added KPI Name", 
+    "VON_BIS", 
+    each [BP_VON] & "-" & [BP], 
+    type text
+  ), 
+  #"Removed BP_VON" = Table.RemoveColumns(#"Added VON_BIS", {"BP_VON"})
+in
+    #"Removed BP_VON"
