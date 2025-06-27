@@ -15,8 +15,8 @@ fragment LEXICAL_ELEMENTS : LEXICAL_ELEMENT LEXICAL_ELEMENTS?;
 fragment LEXICAL_ELEMENT  : WHITESPACE | TOKEN LINE_COMMENT | TOKEN BLOCK_COMMENT;
 
 // Trivia that should completely disappear from the token stream
-WHITESPACE    : ( [\p{White_Space}] | [\u0009\u000B\u000C] | [\u000D][\u000A] NEW_LINE_CHAR) -> skip;
-NEW_LINE_CHAR : [\u000D\u000A\u0085\u2028\u2029]                                             -> skip;
+WHITESPACE    : ( [\p{White_Space}] | [\u0009\u000B\u000C] | [\u000D][\u000A] NEW_LINE_CHAR) -> channel(IRRELEVANTCHARS);
+NEW_LINE_CHAR : [\u000D\u000A\u0085\u2028\u2029]                                             -> channel(IRRELEVANTCHARS);
 
 // Comments – redirected to COMMENT channel
 LINE_COMMENT

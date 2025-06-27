@@ -5,7 +5,7 @@ import sys
 if sys.version_info[1] > 5:
     from typing import TextIO
 else:
-    from typing.io import TextIO # type: ignore
+    from typing.io import TextIO # type: ignore[import-untyped]
 
 
 def serializedATN():
@@ -535,7 +535,7 @@ def serializedATN():
         5,35,0,0,920,922,8,37,0,0,921,918,1,0,0,0,921,919,1,0,0,0,922,224,
         1,0,0,0,37,0,229,238,244,258,268,270,379,385,398,405,712,716,723,
         734,739,751,759,764,768,770,778,788,807,814,819,825,832,837,845,
-        851,856,863,868,886,916,921,2,6,0,0,0,2,0
+        851,856,863,868,886,916,921,2,0,3,0,0,2,0
     ]
 
 class PowerQueryLexer(Lexer):

@@ -3,4 +3,4 @@ venv/
 __pycache__/*
 tests/__pycache__/*
 src/PyM.egg-info/*
-src\PyM\__pycache__/*
+src/PyM/__pycache__/*

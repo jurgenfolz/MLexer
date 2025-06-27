@@ -7,7 +7,10 @@ class MExpression:
         self.m_expression: str = m_expression
         self.input_stream: InputStream = InputStream(m_expression)
         self.lexer: PowerQueryLexer = PowerQueryLexer(self.input_stream)
-        #self.lexer.removeErrorListeners()
+        self.lexer.removeErrorListeners()
+        
+        self.m_expression_no_comments: str = self.remove_comments()
+        
     
     def __str__(self) -> str:
         """Returns the M expression as a string"""
@@ -49,7 +52,6 @@ class MExpression:
         
         return comments
         
-    
     def print_tokens(self, ignore_irrelevant_chars: bool = True) -> None: 
         """Prints the tokens of the M expression"""
         self.lexer.reset()

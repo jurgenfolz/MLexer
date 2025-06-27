@@ -1,11 +1,12 @@
 section Section1;
 
 shared dCities = let
-
+  //Xupinga comment
   Source = Excel.Workbook(Web.Contents("https://brunnerbi-my.sharepoint.com/personal/klaus_brunner_bi/Documents/Apps/Microsoft Power Query/Uploaded Files/major_cities.xlsx"), null, true),
 
   #"Navigation 1" = Source{[Item = "cities", Kind = "Sheet"]}[Data],
-
+  /*Longer comment here
+    its actually a multi-line comment*/
   #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
 
   #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"name", type text}, {"asciiname", type text}, {"lat", type number}, {"lon", type number}, {"class", type text}, {"country_code", type text}, {"pop", Int64.Type}, {"elevation", Int64.Type}, {"timezone", type text}, {"ID", Int64.Type}})
