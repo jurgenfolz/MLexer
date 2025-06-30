@@ -78,4 +78,82 @@ class MExpression:
                 file.write(f"Token: {token.text}, Type: {self.lexer.symbolicNames[token.type]}, Number: {token.type}\n")
                 token = self.lexer.nextToken()
                 
-    
+    def generate_html(self, light: bool = True) -> str:
+        dark = {
+            "bg":        "#1e1e1e",
+            "text":      "#d4d4d4",
+            "keyword":   "#569cd6",
+            "operator":  "#d4d4d4",
+            "identifier": "#dcdcaa",
+            "number":    "#b5cea8",
+            "string":    "#ce9178",
+            "comment":   "#6a9955",
+        }
+        light = {
+            "bg":        "#ffffff",
+            "text":      "#000000",
+            "keyword":   "#0000ff",
+            "operator":  "#333333",
+            "identifier": "#795e26",
+            "number":    "#008000",
+            "string":    "#a31515",
+            "comment":   "#008000",
+        }
+        c = light if light else dark
+
+        html: list[str] = [
+            f'<pre style="font-family: Consolas, monospace; '
+            f'background:{c["bg"]}; color:{c["text"]}; padding:8px;">'
+        ]
+
+        kw_tokens = {
+            PowerQueryLexer.LET, PowerQueryLexer.IN, PowerQueryLexer.IF,
+            PowerQueryLexer.THEN, PowerQueryLexer.ELSE, PowerQueryLexer.EACH,
+            PowerQueryLexer.TRY, PowerQueryLexer.TYPE, PowerQueryLexer.META,
+            PowerQueryLexer.SECTION, PowerQueryLexer.SHARED, PowerQueryLexer.AND,
+            PowerQueryLexer.OR, PowerQueryLexer.NOT, PowerQueryLexer.OTHERWISE
+        }
+        op_tokens = {
+            PowerQueryLexer.PLUS, PowerQueryLexer.MINUS, PowerQueryLexer.STAR,
+            PowerQueryLexer.SLASH, PowerQueryLexer.AMP, PowerQueryLexer.LEQ,
+            PowerQueryLexer.GEQ, PowerQueryLexer.GE, PowerQueryLexer.LE,
+            PowerQueryLexer.NEQ, PowerQueryLexer.EQUALS, PowerQueryLexer.DOTDOT,
+            PowerQueryLexer.ARROW, PowerQueryLexer.BANG, PowerQueryLexer.COMMA,
+            PowerQueryLexer.SEMICOLON, PowerQueryLexer.OPEN_PAREN,
+            PowerQueryLexer.CLOSE_PAREN, PowerQueryLexer.OPEN_BRACKET,
+            PowerQueryLexer.CLOSE_BRACKET, PowerQueryLexer.OPEN_BRACE,
+            PowerQueryLexer.CLOSE_BRACE
+        }
+
+        self.lexer.reset()
+        tok: Token = self.lexer.nextToken()
+        while tok.type != Token.EOF:
+
+            # keep whitespace / EOL exactly as they are
+            if tok.channel == getattr(PowerQueryLexer, "IRRELEVANTCHARS", -1):
+                html.append(tok.text)
+                tok = self.lexer.nextToken()
+                continue
+
+            # comments
+            if tok.channel == getattr(PowerQueryLexer, "COMMENTCHANNEL", -2):
+                html.append(f'<span style="color:{c["comment"]};">{tok.text}</span>')
+                tok = self.lexer.nextToken()
+                continue
+
+            if tok.type in kw_tokens:
+                style = "keyword"
+            elif tok.type in op_tokens:
+                style = "operator"
+            elif tok.type == PowerQueryLexer.LITERAL:
+                style = "string" if tok.text.startswith('"') or tok.text.startswith("#") else "number"
+            elif tok.type == PowerQueryLexer.IDENTIFIER:
+                style = "identifier"
+            else:
+                style = "text"
+
+            html.append(f'<span style="color:{c[style]};">{tok.text}</span>')
+            tok = self.lexer.nextToken()
+
+        html.append("</pre>")
+        return "".join(html)

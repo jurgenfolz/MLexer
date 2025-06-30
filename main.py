@@ -16,20 +16,21 @@ def main():
     with open(r"C:\Users\KlausFolz\Desktop\Brunner BI Repositories\measurekiller_core\temp\dataflow_api_response.json", 'r', encoding='utf-8') as file:
         dataflow_json = json.load(file)
     
-    dataflow_document = dataflow_json.get("pbi:mashup").get("document")
-    
-    queries_dict = dataflow_split_queries(query)
-    
-    
-    
-    for key, value in queries_dict.items():
-        print(f"Query Name: {key}")
-        print(f"Query Text: {value}\n")
+    # dataflow_document = dataflow_json.get("pbi:mashup").get("document")
+    # queries_dict = dataflow_split_queries(query)
+    # for key, value in queries_dict.items():
+    #     print(f"Query Name: {key}")
+    #     print(f"Query Text: {value}\n")
    
     #MExpression(dataflow_document).print_tokens()
    
-    #expr = MExpression(query_nested)
-    #expr.print_tokens()
+    expr = MExpression(query_nested)
+    expr.print_tokens()
+    html = expr.generate_html(light=True)
+    
+    with open('output.html', 'w', encoding='utf-8') as f:
+        f.write(html)
+    
     #print(expr.extract_comments())
     
 if __name__ == '__main__':
