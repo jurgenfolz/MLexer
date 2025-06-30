@@ -1,0 +1,53 @@
+section Section1;
+shared #"name-basics" = let
+  Source = SharePoint.Files("https://brunnerbi.sharepoint.com/sites/brunner.bi", [ApiVersion = 15]),
+  #"Filtered rows" = Table.SelectRows(Source, each [Folder Path] = "https://brunnerbi.sharepoint.com/sites/brunner.bi/Shared Documents/Measure Killer/Testing/raw data/"),
+  Navigation = #"Filtered rows"{[Name = "name.basics.tsv", #"Folder Path" = "https://brunnerbi.sharepoint.com/sites/brunner.bi/Shared Documents/Measure Killer/Testing/raw data/"]}[Content],
+  #"Imported CSV" = Csv.Document(Navigation, [Delimiter = "#(tab)", Columns = 6, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+  #"Promoted headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars = true]),
+   #"Replaced Value" = Table.ReplaceValue(#"Promoted headers","\N",null,Replacer.ReplaceValue,{"birthYear"}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value",{{"birthYear", Int64.Type}}),
+    #"Added Custom" = Table.AddColumn(#"Changed Type", "Age", each 2024-[birthYear]),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Age", Int64.Type}})
+in
+    #"Changed Type1";
+shared #"title-akas" = let
+  Source = SharePoint.Files("https://brunnerbi.sharepoint.com/sites/brunner.bi", [ApiVersion = 15]),
+  #"Filtered rows" = Table.SelectRows(Source, each [Folder Path] = "https://brunnerbi.sharepoint.com/sites/brunner.bi/Shared Documents/Measure Killer/Testing/raw data/"),
+  Navigation = #"Filtered rows"{[Name = "title.akas.tsv", #"Folder Path" = "https://brunnerbi.sharepoint.com/sites/brunner.bi/Shared Documents/Measure Killer/Testing/raw data/"]}[Content],
+  #"Imported CSV" = Csv.Document(Navigation, [Delimiter = "#(tab)", Columns = 6, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+  #"Promoted headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars = true]) 
+in
+  #"Promoted headers";
+shared #"title-ratings" = let
+  Source = SharePoint.Files("https://brunnerbi.sharepoint.com/sites/brunner.bi", [ApiVersion = 15]),
+  #"Filtered rows" = Table.SelectRows(Source, each [Folder Path] = "https://brunnerbi.sharepoint.com/sites/brunner.bi/Shared Documents/Measure Killer/Testing/raw data/"),
+  Navigation = #"Filtered rows"{[Name = "title.ratings.tsv", #"Folder Path" = "https://brunnerbi.sharepoint.com/sites/brunner.bi/Shared Documents/Measure Killer/Testing/raw data/"]}[Content],
+  #"Imported CSV" = Csv.Document(Navigation, [Delimiter = "#(tab)", Columns = 3, QuoteStyle = QuoteStyle.None]),
+  #"Promoted headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars = true]),
+  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"tconst", type text}, {"averageRating", type number}, {"numVotes", Int64.Type}}) 
+in
+  #"Changed column type";
+shared #"title-basics" = let
+  Source = SharePoint.Files("https://brunnerbi.sharepoint.com/sites/brunner.bi", [ApiVersion = 15]),
+  #"Filtered rows" = Table.SelectRows(Source, each [Folder Path] = "https://brunnerbi.sharepoint.com/sites/brunner.bi/Shared Documents/Measure Killer/Testing/raw data/"),
+  Navigation = #"Filtered rows"{[Name = "title.basics.tsv", #"Folder Path" = "https://brunnerbi.sharepoint.com/sites/brunner.bi/Shared Documents/Measure Killer/Testing/raw data/"]}[Content],
+  #"Imported CSV" = Csv.Document(Navigation, [Delimiter = "#(tab)", Columns = 9, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+  #"Promoted headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars = true]),
+  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"tconst", type text}, {"titleType", type text}, {"primaryTitle", type text}, {"originalTitle", type text}, {"isAdult", type text}, {"startYear", type text}, {"endYear", type text}, {"runtimeMinutes", type text}, {"genres", type text}}),
+    #"Renamed Columns" = Table.RenameColumns(#"Changed column type",{{"titleType", "types"}}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"runtimeMinutes", Int64.Type}}),
+    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type", {{"runtimeMinutes", null}}),
+    #"Replaced Value" = Table.ReplaceValue(#"Replaced Errors","\N",null,Replacer.ReplaceValue,{"startYear"}),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value",{{"startYear", Int64.Type}})
+in
+    #"Changed Type1";
+shared #"title-principals" = let
+  Source = SharePoint.Files("https://brunnerbi.sharepoint.com/sites/brunner.bi", [ApiVersion = 15]),
+  #"Filtered rows" = Table.SelectRows(Source, each [Folder Path] = "https://brunnerbi.sharepoint.com/sites/brunner.bi/Shared Documents/Measure Killer/Testing/raw data/"),
+  Navigation = #"Filtered rows"{[Name = "title.principals.tsv", #"Folder Path" = "https://brunnerbi.sharepoint.com/sites/brunner.bi/Shared Documents/Measure Killer/Testing/raw data/"]}[Content],
+  #"Imported CSV" = Csv.Document(Navigation, [Delimiter = "#(tab)", Columns = 6, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+  #"Promoted headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars = true]),
+  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"tconst", type text}, {"ordering", Int64.Type}, {"nconst", type text}, {"category", type text}, {"job", type text}, {"characters", type text}}) 
+in
+  #"Changed column type";
