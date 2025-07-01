@@ -1,0 +1,35 @@
+let
+/*ZPK (Zugspünktlichkeit kommerziell)*/
+  Source = Snowflake.Databases(
+    Server, 
+    Warehouse, 
+    [Role = Role]
+  ),
+    PROD_STD_DASHPROD_DB_Database = Source{[Name="PROD_STD_DASHPROD_DB",Kind="Database"]}[Data],
+    DATAMARTS_Schema = PROD_STD_DASHPROD_DB_Database{[Name="DATAMARTS",Kind="Schema"]}[Data],
+    DASHPROD_FS_KVZ2_SP_PIP_ZPK_View = DATAMARTS_Schema{[Name="DASHPROD_FS_KVZ2_SP_PIP_ZPK",Kind="View"]}[Data],
+    #"Renamed Columns" = Table.RenameColumns(DASHPROD_FS_KVZ2_SP_PIP_ZPK_View,{{"BETRIEBSTAG", "DATUM"}, {"BP_ABKUERZUNG", "BP_ABK"}, {"TRAFIK_RV_FV", "RV_FV"}, {"ANZAHL_ZUEGE_ST3_KOMM_AN", "ANZAHL_ZUEGE_AN_ST3_KOMM"}, {"B_REGION_ABKUERZUNG","Subgroup2"} ,{"ANZAHL_ZUEGE_TOTAL_AN", "ANZAHL_ZUEGE_AN"}}), 
+  #"Removed Unused Columns" = Table.SelectColumns(#"Renamed Columns",{"DATUM", "BP_ABK", "RV_FV", "ANZAHL_ZUEGE_AN_ST3_KOMM", "ANZAHL_ZUEGE_AN","Subgroup2"}), 
+  #"Renamed BP Column" = //Hi there guys
+//Hi there
+Table.RenameColumns(#"Removed Unused Columns", {{"BP_ABK", "BP"}}),
+  
+  //Subgroup for ZPK is RV/FV (Regionalverkehr and Fernverkehr)
+  #"Added KPI Name Column" = Table.AddColumn(#"Renamed BP Column", "KPI", each "ZPK", type text),
+
+  /*Numerator for this table is the punctual trains (pünktliche Züge)
+  Denominator is the total amount of trains*/
+  #"Renamed Columns Num and Dem." = Table.RenameColumns(
+    #"Added KPI Name Column", 
+    {
+      {"ANZAHL_ZUEGE_AN_ST3_KOMM", "Numerator"}, 
+      {"ANZAHL_ZUEGE_AN", "Denominator"}, 
+      {"RV_FV", "Subgroup"}
+    }
+  ),
+    #"Replaced RME" = Table.ReplaceValue(#"Renamed Columns Num and Dem.","RME","Mitte",Replacer.ReplaceText,{"Subgroup2"}),
+    #"Replaced ROT" = Table.ReplaceValue(#"Replaced RME","ROT","Ost",Replacer.ReplaceText,{"Subgroup2"}),
+    #"Replaced RSD" = Table.ReplaceValue(#"Replaced ROT","RSD","Süd",Replacer.ReplaceText,{"Subgroup2"}),
+    #"Replaced RWT" = Table.ReplaceValue(#"Replaced RSD","RWT","West",Replacer.ReplaceText,{"Subgroup2"})
+in
+    #"Replaced RWT"

@@ -77,7 +77,64 @@ class MExpression:
             while token.type != Token.EOF:
                 file.write(f"Token: {token.text}, Type: {self.lexer.symbolicNames[token.type]}, Number: {token.type}\n")
                 token = self.lexer.nextToken()
+    
+    def find_identifier_occurrences(self, identifier: str) -> list[tuple[int, int]]:
+        """
+        Finds all occurrences of a given identifier in the M expression.
+
+        Args:
+            identifier (str): The identifier to search for.
+
+        Returns:
+            list[tuple[int, int]]: A list of tuples where each tuple contains the line number and column number
+        """
+        
+        id_lower = identifier.lower()
+        matches: list[tuple[int, int]] = []
+        self.lexer.reset()
+        tok: Token = self.lexer.nextToken()
+        while tok.type != Token.EOF:
+
+            if tok.channel == Token.DEFAULT_CHANNEL and (tok.type == PowerQueryLexer.IDENTIFIER):
                 
+                if tok.text.lower() == id_lower:
+                    matches.append((tok.line, tok.column + 1))
+
+            tok = self.lexer.nextToken()
+
+        return matches
+           
+           
+    def find_literal_occurrences(self, identifier: str) -> list[tuple[int, int]]:
+        """
+        Finds all occurrences of a given literal in the M expression.
+
+        Args:
+            identifier (str): The identifier to search for.
+
+        Returns:
+            list[tuple[int, int]]: A list of tuples where each tuple contains the line number and column number
+        """
+        
+        id_lower = identifier.lower()
+        matches: list[tuple[int, int]] = []
+        self.lexer.reset()
+        tok: Token = self.lexer.nextToken()
+        while tok.type != Token.EOF:
+
+            if tok.channel == Token.DEFAULT_CHANNEL and (tok.type == PowerQueryLexer.LITERAL):
+                
+                if tok.text.lower() == id_lower:
+                    matches.append((tok.line, tok.column + 1))
+                elif id_lower in tok.text.lower():
+                    # Literals will mostly contain the quotation marks, so we remove them for comparison
+                    if tok.text.startswith('"') and tok.text.endswith('"') and id_lower in tok.text[1:-1].lower():
+                        matches.append((tok.line, tok.column + 1))
+
+            tok = self.lexer.nextToken()
+
+        return matches
+    
     def generate_html(self, light: bool = True) -> str:
         dark = {
             "bg":        "#1e1e1e",
@@ -157,3 +214,4 @@ class MExpression:
 
         html.append("</pre>")
         return "".join(html)
+    
