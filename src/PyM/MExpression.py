@@ -10,12 +10,22 @@ class MExpression:
         self.lexer.removeErrorListeners()
         
         self.m_expression_no_comments: str = self.remove_comments()
-        
-    
+        self._kind: str = self._classify() # "query" or "parameter"
+     
     def __str__(self) -> str:
         """Returns the M expression as a string"""
         return self.m_expression
-        
+    
+    
+    @property
+    def is_parameter(self) -> bool:
+        return self._kind == "parameter"
+
+    @property
+    def is_query(self) -> bool:
+        return self._kind == "query"
+    
+    
     def remove_comments(self) -> str:
         """Removes comments from the M expression
 
@@ -103,7 +113,28 @@ class MExpression:
             tok = self.lexer.nextToken()
 
         return matches
-           
+    
+    def _classify(self) -> str:
+        self.lexer.reset()
+        IRR = getattr(PowerQueryLexer, "IRRELEVANTCHARS", -1)
+        CMT = getattr(PowerQueryLexer, "COMMENTCHANNEL", -2)
+
+        tok: Token = self.lexer.nextToken()
+
+        # optional header: shared <name> =
+        if tok.type == PowerQueryLexer.SHARED:
+            while tok.type not in (PowerQueryLexer.EQUALS, Token.EOF):
+                tok = self.lexer.nextToken()
+            tok = self.lexer.nextToken()  # first token after '='
+
+        # skip trivia
+        while tok.channel in (IRR, CMT):
+            tok = self.lexer.nextToken()
+
+        if tok.type == PowerQueryLexer.LET:
+            return "query"
+        return "parameter"
+    
            
     def find_literal_occurrences(self, identifier: str) -> list[tuple[int, int]]:
         """
