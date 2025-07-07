@@ -1,0 +1,12 @@
+// Function: GetWeekdaysBetweenDates
+// Description: Returns a list of weekdays (Mon–Fri) between two dates (inclusive).
+
+let
+    GetWeekdaysBetweenDates = (StartDate as date, EndDate as date) as list =>
+    let
+        DateList = List.Dates(StartDate, Duration.Days(EndDate - StartDate) + 1, uration(1,0,0,0)),
+        Weekdays = List.Select(DateList, each Date.DayOfWeek(_, Day.Monday) 5)
+    in
+        Weekdays
+in
+    GetWeekdaysBetweenDates

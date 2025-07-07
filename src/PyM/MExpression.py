@@ -1,4 +1,6 @@
 from antlr4 import InputStream, Token
+from typing import Literal
+
 from .PowerQueryLexer import PowerQueryLexer
 
 class MExpression:
@@ -10,7 +12,7 @@ class MExpression:
         self.lexer.removeErrorListeners()
         
         self.m_expression_no_comments: str = self.remove_comments()
-        self._kind: str = self._classify() # "query" or "parameter"
+        self._kind: Literal["parameter", "query", "function"] = self._classify()
      
     def __str__(self) -> str:
         """Returns the M expression as a string"""
@@ -25,6 +27,9 @@ class MExpression:
     def is_query(self) -> bool:
         return self._kind == "query"
     
+    @property
+    def is_function(self) -> bool:
+        return self._kind == "function"
     
     def remove_comments(self) -> str:
         """Removes comments from the M expression
@@ -114,28 +119,6 @@ class MExpression:
 
         return matches
     
-    def _classify(self) -> str:
-        self.lexer.reset()
-        IRR = getattr(PowerQueryLexer, "IRRELEVANTCHARS", -1)
-        CMT = getattr(PowerQueryLexer, "COMMENTCHANNEL", -2)
-
-        tok: Token = self.lexer.nextToken()
-
-        # optional header: shared <name> =
-        if tok.type == PowerQueryLexer.SHARED:
-            while tok.type not in (PowerQueryLexer.EQUALS, Token.EOF):
-                tok = self.lexer.nextToken()
-            tok = self.lexer.nextToken()  # first token after '='
-
-        # skip trivia
-        while tok.channel in (IRR, CMT):
-            tok = self.lexer.nextToken()
-
-        if tok.type == PowerQueryLexer.LET:
-            return "query"
-        return "parameter"
-    
-           
     def find_literal_occurrences(self, identifier: str) -> list[tuple[int, int]]:
         """
         Finds all occurrences of a given literal in the M expression.
@@ -246,3 +229,60 @@ class MExpression:
         html.append("</pre>")
         return "".join(html)
     
+    #region #*Classification Methods
+    def _classify(self) -> str:
+        self.lexer.reset()
+        IRR = getattr(PowerQueryLexer, "IRRELEVANTCHARS", -1)
+        CMT = getattr(PowerQueryLexer, "COMMENTCHANNEL", -2)
+
+        tok: Token = self.lexer.nextToken()
+
+        # optional “shared Name =”
+        if tok.type == PowerQueryLexer.SHARED:
+            while tok.type not in (PowerQueryLexer.EQUALS, Token.EOF):
+                tok = self.lexer.nextToken()
+            tok = self.lexer.nextToken()
+
+        while tok.channel in (IRR, CMT):
+            tok = self.lexer.nextToken()
+
+        # parameter → literal or identifier at top level
+        if tok.type not in (PowerQueryLexer.LET,):
+            return "parameter"
+
+        # we are inside outer let-block
+        # seek: Identifier =  ( … )  => function
+        # otherwise query
+        # skip after LET
+        tok = self._next_sig(tok)
+        if tok.type != PowerQueryLexer.IDENTIFIER:
+            return "query"
+        tok = self._next_sig()
+        if tok.type != PowerQueryLexer.EQUALS:
+            return "query"
+        tok = self._next_sig()
+        if tok.type == PowerQueryLexer.OPEN_PAREN:
+            # quick scan to confirm an ARROW appears before another LET/IN
+            while tok.type not in (Token.EOF, PowerQueryLexer.IN):
+                if tok.type == PowerQueryLexer.ARROW:
+                    return "function"
+                tok = self._next_sig()
+        return "query"
+
+    def _next_sig(self, current: Token | None = None) -> Token:
+        IRR = getattr(PowerQueryLexer, "IRRELEVANTCHARS", -1)
+        CMT = getattr(PowerQueryLexer, "COMMENTCHANNEL", -2)
+        tok = current if current else self.lexer.nextToken()
+        if current:  # start from already-fetched token
+            tok = self.lexer.nextToken()
+        while tok.channel in (IRR, CMT):
+            tok = self.lexer.nextToken()
+        return tok
+    
+    #enregion #*Classification Methods
+
+
+
+
+
+

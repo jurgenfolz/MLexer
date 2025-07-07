@@ -3,14 +3,18 @@ import os
 import json
 
 def main():
-    file_path = os.path.join('queries', 'imdb_dataflow.txt')
+    file_path = os.path.join('queries', 'table_nested_join.txt')
     file_path_nested = os.path.join('queries', 'parameter.txt')
+    file_function = os.path.join('queries', 'custom_func.txt')
     
     with open(file_path, 'r', encoding='utf-8') as file:
         query = file.read()
 
     with open(file_path_nested, 'r', encoding='utf-8') as file:
-        query_nested = file.read()
+        query_param = file.read()
+        
+    with open(file_function, 'r', encoding='utf-8') as file:
+        query_function = file.read()
     
     
     # dataflow_document = dataflow_json.get("pbi:mashup").get("document")
@@ -21,9 +25,13 @@ def main():
    
     #MExpression(dataflow_document).print_tokens()
    
-    expr = MExpression(query_nested)
-    expr.print_tokens()
-    print(expr.find_literal_occurrences('sbb-eap.snowflakecomputing.com'))
+    expr = MExpression(query)
+    expr_param = MExpression(query_param)
+    expr_function = MExpression(query_function)
+    
+    print(f"Query: {expr._kind}")
+    print(f"Query Parameter: {expr_param._kind}")
+    print(f"Query Function: {expr_function._kind}") 
    
     
     
