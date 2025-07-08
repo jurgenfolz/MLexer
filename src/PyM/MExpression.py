@@ -18,6 +18,21 @@ class MExpression:
         """Returns the M expression as a string"""
         return self.m_expression
     
+    def __getstate__(self):
+        state = self.__dict__.copy()
+        # Handle attributes that can't be pickled
+        state["input_stream"] = None 
+        state["lexer"] = None
+        return state
+    
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+        # Reinitialize attributes that were set to None
+        self.input_stream = InputStream(self.m_expression)
+        self.lexer = PowerQueryLexer(self.input_stream)
+        self.lexer.removeErrorListeners()
+        self._kind = self._classify()
+        
     
     @property
     def is_parameter(self) -> bool:
