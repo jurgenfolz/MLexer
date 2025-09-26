@@ -1,0 +1,108 @@
+let
+    //Import the CSV of Tickers
+ 
+    Source = Csv.Document(
+        File.Contents(PathtoTickersCSV),
+        [Delimiter=",", Columns=1, QuoteStyle=QuoteStyle.None]
+    ),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"Ticker", type text}}),
+ 
+    //Add a column that calls the API and returns raw JSON for each Ticker
+    WithAPICall = Table.AddColumn(
+        #"Changed Type",
+        "APICall",
+        each 
+            Web.Contents(
+                "https://query1.finance.yahoo.com",
+                [
+                    RelativePath = "v8/finance/chart/" & [Ticker],
+                    Query = [
+                        interval = Interval,
+                        range   = Range
+                    ]
+                ]
+            )
+    ),
+    //Parse the JSON into a usable record
+    WithParsedJSON = Table.AddColumn(
+        WithAPICall,
+        "ParsedJSON",
+        each Json.Document([APICall])
+    ),
+    // This step extracts timestamps, open, high, low, close, volume arrays and transforms them into a proper table (one row per historical record).
+    WithDataTable = Table.AddColumn(
+        WithParsedJSON,
+        "HistoricData",
+        each
+            let
+                rawJson                = [ParsedJSON],
+                chartRecord            = rawJson[chart],
+                resultsList            = chartRecord[result],
+                firstResult            = resultsList{0},
+                timestamps            = firstResult[timestamp],
+                indicatorsRecord       = firstResult[indicators],
+                quoteList              = indicatorsRecord[quote],
+                firstQuote             = quoteList{0},
+                opens                  = firstQuote[open],
+                highs                  = firstQuote[high],
+                lows                   = firstQuote[low],
+                closes                = firstQuote[close],
+                volumes                = firstQuote[volume],
+ 
+                // Build a list of records from the arrays
+                combinedRecords = List.Transform(
+                    {0..(List.Count(timestamps) - 1)},
+                    (i) => [
+                        timestamp = timestamps{i},
+                        open      = opens{i},
+                        high      = highs{i},
+                        low       = lows{i},
+                        close     = closes{i},
+                        volume    = volumes{i}
+                    ]
+                ),
+ 
+                // Convert the list of records into a table
+                dataTable = Table.FromRecords(combinedRecords)
+            in
+                dataTable
+    ),
+    ExpandedData = Table.ExpandTableColumn(
+        WithDataTable,
+        "HistoricData",
+        {"timestamp","open","high","low","close","volume"},
+        {"timestamp","open","high","low","close","volume"}
+    ),
+ 
+    // Unix timestamps to human-readable DateTime
+    WithDateTime = Table.TransformColumns(
+        ExpandedData,
+        {
+            { 
+                "timestamp", 
+                each #datetime(1970, 1, 1, 0, 0, 0) + #duration(0,0,0,_), 
+                type datetime 
+            }
+        }
+    ),
+ 
+ 
+    RenamedColumns = Table.RenameColumns(
+        WithDateTime,
+        {
+            {"timestamp", "DateTime (UTC)"},
+            {"open", "Open"},
+            {"high", "High"},
+            {"low", "Low"},
+            {"close", "Close"},
+            {"volume", "Volume"}
+        }
+    ),
+    #"Removed Columns" = Table.RemoveColumns(RenamedColumns,{"APICall", "ParsedJSON"}),
+    #"Inserted Date" = Table.AddColumn(#"Removed Columns", "Date", each DateTime.Date([#"DateTime (UTC)"]), type date),
+    #"Inserted Time" = Table.AddColumn(#"Inserted Date", "Time", each DateTime.Time([#"DateTime (UTC)"]), type time),
+    #"Changed Type for numbers" = Table.TransformColumnTypes(#"Inserted Time",{{"Close", type number}, {"Low", type number}, {"High", type number}, {"Open", type number}, {"Volume", Int64.Type}})
+in
+    #"Changed Type for numbers"
+ 
