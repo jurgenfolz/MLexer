@@ -1,38 +1,50 @@
-from src.PyM import MExpression, dataflow_split_queries
+from src.PyM import MExpression, dataflow_split_queries, PowerQueryLexer, PowerQueryParser
 import os
 import json
+import datetime
+from antlr4 import InputStream, CommonTokenStream
+from antlr4.error.ErrorStrategy import BailErrorStrategy, DefaultErrorStrategy
+from antlr4.atn.PredictionMode import PredictionMode
+
+
+def parse_with_fallback(parser, tokens, candidates=("document","expression_document","program","start","file","expression")):
+    # Pick the first start rule that exists on this parser
+    start = next((name for name in candidates if hasattr(parser, name)), None)
+    if not start:
+        raise AttributeError(f"No expected start rule found. Available rules: {parser.ruleNames}")
+
+    # Stage 1: FAST SLL + bail
+    parser._interp.predictionMode = PredictionMode.SLL
+    parser._errHandler = BailErrorStrategy()
+    parser.buildParseTrees = True
+
+    try:
+        return getattr(parser, start)()
+    except Exception:
+        # Stage 2: full LL with default error recovery
+        tokens.seek(0)
+        parser.reset()
+        parser._interp.predictionMode = PredictionMode.LL
+        parser._errHandler = DefaultErrorStrategy()
+        return getattr(parser, start)()
+
 
 def main():
-    file_path = os.path.join('queries', 'table_nested_join.txt')
-    file_path_nested = os.path.join('queries', 'parameter.txt')
-    file_function = os.path.join('queries', 'custom_func.txt')
-    
+    start_datetime = datetime.datetime.now()
+    file_path = os.path.join('queries', 'table_nested_join3.txt')
     with open(file_path, 'r', encoding='utf-8') as file:
-        query = file.read()
+         query = file.read()
+    expr = MExpression(query)    
 
-    with open(file_path_nested, 'r', encoding='utf-8') as file:
-        query_param = file.read()
-        
-    with open(file_function, 'r', encoding='utf-8') as file:
-        query_function = file.read()
-    
-    
-    # dataflow_document = dataflow_json.get("pbi:mashup").get("document")
-    # queries_dict = dataflow_split_queries(query)
-    # for key, value in queries_dict.items():
-    #     print(f"Query Name: {key}")
-    #     print(f"Query Text: {value}\n")
-   
-    #MExpression(dataflow_document).print_tokens()
-   
-    expr = MExpression(query)
-    expr_param = MExpression(query_param)
-    expr_function = MExpression(query_function)
-    
-    print(f"Query: {expr._kind}")
-    print(f"Query Parameter: {expr_param._kind}")
-    print(f"Query Function: {expr_function._kind}") 
-   
+
+    lexer = PowerQueryLexer(InputStream(query))
+    tokens = CommonTokenStream(lexer)
+    parser = PowerQueryParser(tokens)
+
+    tree:PowerQueryParser.DocumentContext = parse_with_fallback(parser, tokens)
+    print(tree.toStringTree(recog=parser))
+    end_datetime = datetime.datetime.now()
+    print("Duration:", end_datetime - start_datetime)
     
     
 if __name__ == '__main__':

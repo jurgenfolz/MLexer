@@ -52,6 +52,9 @@ Use this to regenerate the lexer
 
 This creates/updates `src/PyM/PowerQueryLexer.py`.
 
+The grammars are from: https://github.com/antlr/grammars-v4/blob/master/powerquery
+
+
 Roadmap
 -----------
 
