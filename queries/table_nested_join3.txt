@@ -1,0 +1,13 @@
+let
+    Source = AnotherTable,
+    //A comment here
+    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Stadt", type text}, {"Bevölkerung", Int64.Type}, {"Kanton", type text}, {"lat", type number}, {"lng", type number}}),
+    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"Kanton"}, dimKantone, {"Kanton"}, "dimKantone", JoinKind.LeftOuter),
+    #"Expanded dimKantone" = Table.ExpandTableColumn(#"Merged Queries", "dimKantone", {"Kanton"}, {"Kanton.1"}),
+    /*Longer comment here
+    its actually a multi-line comment*/
+    
+    #"Added Custom" = Table.AddColumn(#"Expanded dimKantone", "Custom", each 1),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Custom", Int64.Type}})
+in
+    #"Changed Type1"
