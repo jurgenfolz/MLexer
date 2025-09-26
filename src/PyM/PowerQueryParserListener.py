@@ -197,6 +197,15 @@ class PowerQueryParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by PowerQueryParser#atom.
+    def enterAtom(self, ctx:PowerQueryParser.AtomContext):
+        pass
+
+    # Exit a parse tree produced by PowerQueryParser#atom.
+    def exitAtom(self, ctx:PowerQueryParser.AtomContext):
+        pass
+
+
     # Enter a parse tree produced by PowerQueryParser#literal_expression.
     def enterLiteral_expression(self, ctx:PowerQueryParser.Literal_expressionContext):
         pass

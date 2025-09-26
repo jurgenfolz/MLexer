@@ -7,7 +7,7 @@ from antlr4.error.ErrorStrategy import BailErrorStrategy, DefaultErrorStrategy
 from antlr4.atn.PredictionMode import PredictionMode
 
 
-def parse_with_fallback(parser, tokens, candidates=("document","expression_document","program","start","file","expression")):
+def parse_with_fallback(parser: PowerQueryParser, tokens:CommonTokenStream, candidates=("document","expression_document","program","start","file","expression")):
     # Pick the first start rule that exists on this parser
     start = next((name for name in candidates if hasattr(parser, name)), None)
     if not start:
@@ -31,7 +31,7 @@ def parse_with_fallback(parser, tokens, candidates=("document","expression_docum
 
 def main():
     start_datetime = datetime.datetime.now()
-    file_path = os.path.join('queries', 'table_nested_join3.txt')
+    file_path = os.path.join('queries', 'dataflow_queries.txt')
     with open(file_path, 'r', encoding='utf-8') as file:
          query = file.read()
     expr = MExpression(query)    

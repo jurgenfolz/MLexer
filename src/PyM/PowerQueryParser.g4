@@ -41,29 +41,26 @@ expression_document
     ;
 
 expression
-    : logical_or_expression
-    | each_expression
+    // Put the constructs with distinct leading tokens first to help prediction
+    : each_expression
     | function_expression
     | let_expression
     | if_expression
-    | let_expression
     | error_raising_expression
     | error_handling_expression
+    | logical_or_expression
     ;
 
 logical_or_expression
-    : logical_and_expression
-    | logical_and_expression OR logical_or_expression
+    : logical_and_expression (OR logical_and_expression)*
     ;
 
 logical_and_expression
-    : is_expression
-    | logical_and_expression AND is_expression
+    : is_expression (AND is_expression)*
     ;
 
 is_expression
-    : as_expression
-    | is_expression IS nullable_primitive_type
+    : as_expression (IS nullable_primitive_type)?
     ;
 
 nullable_primitive_type
@@ -71,66 +68,60 @@ nullable_primitive_type
     ;
 
 as_expression
-    : equality_expression
-    | as_expression AS nullable_primitive_type
+    : equality_expression (AS nullable_primitive_type)*
     ;
 
 equality_expression
-    : relational_expression
-    | relational_expression EQUALS equality_expression
-    | relational_expression NEQ equality_expression
+    : relational_expression ((EQUALS | NEQ) relational_expression)*
     ;
 
 relational_expression
-    : additive_expression
-    | additive_expression LE relational_expression
-    | additive_expression GE relational_expression
-    | additive_expression LEQ additive_expression
-    | additive_expression GEQ relational_expression
+    : additive_expression ((LE | GE | LEQ | GEQ) additive_expression)*
     ;
 
 additive_expression
-    : multiplicative_expression
-    | multiplicative_expression PLUS additive_expression
-    | multiplicative_expression MINUS additive_expression
-    | multiplicative_expression AMP additive_expression
+    : multiplicative_expression ((PLUS | MINUS | AMP) multiplicative_expression)*
     ;
 
 multiplicative_expression
-    : metadata_expression
-    | metadata_expression STAR multiplicative_expression
-    | metadata_expression SLASH multiplicative_expression
+    : metadata_expression ((STAR | SLASH) metadata_expression)*
     ;
 
 metadata_expression
-    : unary_expression
-    | unary_expression META unary_expression
+    : unary_expression (META unary_expression)*
     ;
 
 unary_expression
-    : type_expression
-    | PLUS unary_expression
+    : PLUS unary_expression
     | MINUS unary_expression
     | NOT unary_expression
+    | type_expression
     ;
 
+// Primary expression as atom with zero or more suffixes; keeps ANTLR's
+// direct-left-recursion but dramatically reduces ambiguity
 primary_expression
-    : literal_expression
-    | list_expression
-    | record_expression
-    | identifier_expression
-    | section_access_expression
-    | parenthesized_expression
-    | primary_expression field_selector
-    | implicit_target_field_selection
-    | primary_expression required_projection
-    | primary_expression optional_projection //projection
-    | implicit_target_projection             //field_access_expression
-    | primary_expression OPEN_BRACE item_selector CLOSE_BRACE
-    | primary_expression OPEN_BRACE item_selector CLOSE_BRACE OPTIONAL //item access expression 
-    | primary_expression OPEN_PAREN argument_list? CLOSE_PAREN         //invoke_expression 
-    | not_implemented_expression
-    ;
+        : atom
+            (
+                field_selector
+            | required_projection
+            | optional_projection
+            | OPEN_BRACE item_selector CLOSE_BRACE (OPTIONAL)?
+            | OPEN_PAREN argument_list? CLOSE_PAREN
+            )*
+        | implicit_target_field_selection
+        | implicit_target_projection
+        | not_implemented_expression
+        ;
+
+atom
+        : literal_expression
+        | list_expression
+        | record_expression
+        | identifier_expression
+        | section_access_expression
+        | parenthesized_expression
+        ;
 
 literal_expression
     : LITERAL
