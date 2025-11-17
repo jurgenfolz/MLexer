@@ -245,6 +245,7 @@ class MExpression:
         return "".join(html)
     
     #region #*Classification Methods
+    
     def _classify(self) -> str:
         self.lexer.reset()
         IRR = getattr(PowerQueryLexer, "IRRELEVANTCHARS", -1)
@@ -261,12 +262,28 @@ class MExpression:
         while tok.channel in (IRR, CMT):
             tok = self.lexer.nextToken()
 
-        # parameter → literal or identifier at top level
+        # standalone function definition
+        if tok.type == PowerQueryLexer.OPEN_PAREN:
+            if self._has_arrow_before((Token.EOF,), tok):
+                return "function"
+            return "query"
+
+        # identifier assignment without let/in
+        if tok.type == PowerQueryLexer.IDENTIFIER:
+            ahead = self._next_sig()
+            if ahead.type == PowerQueryLexer.EQUALS:
+                after_equals = self._next_sig()
+                if after_equals.type == PowerQueryLexer.OPEN_PAREN and self._has_arrow_before((Token.EOF,), after_equals):
+                    return "function"
+                return "query"
+            return "parameter"
+
+        # parameter: literal or identifier at top level #*Easy peasy
         if tok.type not in (PowerQueryLexer.LET,):
             return "parameter"
 
         # we are inside outer let-block
-        # seek: Identifier =  ( … )  => function
+        # Identifier for functions =  (stuff)  => function
         # otherwise query
         # skip after LET
         tok = self._next_sig(tok)
@@ -276,12 +293,8 @@ class MExpression:
         if tok.type != PowerQueryLexer.EQUALS:
             return "query"
         tok = self._next_sig()
-        if tok.type == PowerQueryLexer.OPEN_PAREN:
-            # quick scan to confirm an ARROW appears before another LET/IN
-            while tok.type not in (Token.EOF, PowerQueryLexer.IN):
-                if tok.type == PowerQueryLexer.ARROW:
-                    return "function"
-                tok = self._next_sig()
+        if tok.type == PowerQueryLexer.OPEN_PAREN and self._has_arrow_before((Token.EOF, PowerQueryLexer.IN), tok):
+            return "function"
         return "query"
 
     def _next_sig(self, current: Token | None = None) -> Token:
@@ -293,6 +306,14 @@ class MExpression:
         while tok.channel in (IRR, CMT):
             tok = self.lexer.nextToken()
         return tok
+
+    def _has_arrow_before(self, stop_tokens: tuple[int, ...], current: Token | None = None) -> bool:
+        tok = self._next_sig(current)
+        while tok.type not in stop_tokens:
+            if tok.type == PowerQueryLexer.ARROW:
+                return True
+            tok = self._next_sig()
+        return False
     
     #enregion #*Classification Methods
 
