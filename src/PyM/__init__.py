@@ -2,3 +2,4 @@ from .MExpression import MExpression
 from .PowerQueryLexer import PowerQueryLexer
 from .DataflowQuerySplitter import dataflow_split_queries
 from .PowerQueryParser import PowerQueryParser
+from .ParserExplorer import ParserExplorer
