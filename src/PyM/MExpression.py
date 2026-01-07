@@ -1,3 +1,5 @@
+import html
+
 from antlr4 import InputStream, Token
 from typing import Literal
 
@@ -164,8 +166,32 @@ class MExpression:
 
         return matches
     
+    def _get_original_token_text(self, token: Token) -> str:
+        """Return the exact slice from the original expression when possible."""
+        expr = self.m_expression or ""
+        fallback = getattr(token, "text", "") or ""
+        if not expr:
+            return fallback
+
+        try:
+            start = getattr(token, "start", None)
+            stop = getattr(token, "stop", None)
+            if isinstance(start, int) and isinstance(stop, int):
+                if stop < start:
+                    start, stop = stop, start
+                if start >= len(expr) or stop < 0:
+                    return fallback
+                start = max(0, start)
+                stop = min(len(expr) - 1, stop)
+                if start <= stop:
+                    return expr[start: stop + 1]
+        except Exception:
+            return fallback
+
+        return fallback
+
     def generate_html(self, light: bool = True) -> str:
-        dark = {
+        dark_palette = {
             "bg":        "#1e1e1e",
             "text":      "#d4d4d4",
             "keyword":   "#569cd6",
@@ -175,7 +201,7 @@ class MExpression:
             "string":    "#ce9178",
             "comment":   "#6a9955",
         }
-        light = {
+        light_palette = {
             "bg":        "#ffffff",
             "text":      "#000000",
             "keyword":   "#0000ff",
@@ -185,11 +211,11 @@ class MExpression:
             "string":    "#a31515",
             "comment":   "#008000",
         }
-        c = light if light else dark
+        palette = light_palette if light else dark_palette
 
-        html: list[str] = [
+        html_parts: list[str] = [
             f'<pre style="font-family: Consolas, monospace; '
-            f'background:{c["bg"]}; color:{c["text"]}; padding:8px;">'
+            f'background:{palette["bg"]}; color:{palette["text"]}; padding:8px;">'
         ]
 
         kw_tokens = {
@@ -211,22 +237,27 @@ class MExpression:
             PowerQueryLexer.CLOSE_BRACE
         }
 
+        irr_channel = getattr(PowerQueryLexer, "IRRELEVANTCHARS", -1)
+        comment_channel = getattr(PowerQueryLexer, "COMMENTCHANNEL", -2)
         self.lexer.reset()
         tok: Token = self.lexer.nextToken()
         while tok.type != Token.EOF:
 
             # keep whitespace / EOL exactly as they are
-            if tok.channel == getattr(PowerQueryLexer, "IRRELEVANTCHARS", -1):
-                html.append(tok.text)
+            if tok.channel == irr_channel:
+                safe_text = html.escape(self._get_original_token_text(tok), quote=False)
+                html_parts.append(safe_text)
                 tok = self.lexer.nextToken()
                 continue
 
             # comments
-            if tok.channel == getattr(PowerQueryLexer, "COMMENTCHANNEL", -2):
-                html.append(f'<span style="color:{c["comment"]};">{tok.text}</span>')
+            if tok.channel == comment_channel:
+                safe_text = html.escape(self._get_original_token_text(tok), quote=False)
+                html_parts.append(f'<span style="color:{palette["comment"]};">{safe_text}</span>')
                 tok = self.lexer.nextToken()
                 continue
 
+            safe_text = html.escape(self._get_original_token_text(tok), quote=False)
             if tok.type in kw_tokens:
                 style = "keyword"
             elif tok.type in op_tokens:
@@ -238,11 +269,11 @@ class MExpression:
             else:
                 style = "text"
 
-            html.append(f'<span style="color:{c[style]};">{tok.text}</span>')
+            html_parts.append(f'<span style="color:{palette[style]};">{safe_text}</span>')
             tok = self.lexer.nextToken()
 
-        html.append("</pre>")
-        return "".join(html)
+        html_parts.append("</pre>")
+        return "".join(html_parts)
     
     #region #*Classification Methods
     
