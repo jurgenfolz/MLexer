@@ -6,6 +6,20 @@ from typing import Literal
 from .PowerQueryLexer import PowerQueryLexer
 
 class MExpression:
+    _HASH_KEYWORDS: set[str] = {
+        "#binary",
+        "#date",
+        "#datetime",
+        "#datetimezone",
+        "#duration",
+        "#infinity",
+        "#nan",
+        "#sections",
+        "#shared",
+        "#table",
+        "#time",
+    }
+    
     def __init__(self, m_expression: str):
         m_expression = "" if not isinstance(m_expression, str) else m_expression
         self.m_expression: str = m_expression
@@ -184,7 +198,16 @@ class MExpression:
                 start = max(0, start)
                 stop = min(len(expr) - 1, stop)
                 if start <= stop:
-                    return expr[start: stop + 1]
+                    text = expr[start: stop + 1]
+                    if start >= 2 and text and not text.startswith("#"):
+                        prefix = expr[start - 2:start]
+                        if prefix.startswith("#"):
+                            candidate = f"{prefix}{text}"
+                            if candidate.lower() in self._HASH_KEYWORDS:
+                                return candidate
+                    if start > 0 and not text.startswith("#") and expr[start - 1] == "#":
+                        return f"#{text}"
+                    return text
         except Exception:
             return fallback
 
